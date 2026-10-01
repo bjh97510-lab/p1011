@@ -55,8 +55,11 @@
     @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
     /* 첫 화면: 덩굴 교문 + 양장본 출석부 */
-    #screen-login { min-height: calc(100vh - 32px); display: grid; place-items: center; position: relative; }
-    .gate { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    /* 첫 화면 배경: 숲속의 마법 학교 교문 그림. 위쪽 간판이 보이도록 출석부를 아래로 내림 */
+    #screen-login { min-height: calc(100vh - 32px); display: grid; justify-items: center; align-items: end; position: relative; padding-top: clamp(150px, 36vh, 380px); }
+    .gate { position: fixed; inset: 0; z-index: 0; background: #2b2440 url("assets/back1.jpg") center 30% / cover no-repeat; }
+    @media (max-height: 780px) { #screen-login { padding-top: clamp(110px, 26vh, 380px); } .login-book { padding-block: 1.4rem 1.2rem; } }
+    .gate::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20,15,30,0) 45%, rgba(20,15,30,.35) 100%); }
     .login-book { position: relative; z-index: 2; width: min(440px, 100%); padding: 2rem 1.6rem 1.6rem 2.1rem; }
     .login-book .corner { position: absolute; width: 26px; height: 26px; border: 3px solid #b38b3e; background: linear-gradient(135deg, #e5c77a, #9c7330); z-index: 2; }
     .login-book .corner.tr { top: -8px; right: -8px; border-radius: 0 10px 0 22px; clip-path: polygon(0 0, 100% 0, 100% 100%); }
@@ -78,24 +81,7 @@
   <div class="wrap">
     <!-- ===== 첫 화면: 학번 출석부 ===== -->
     <section id="screen-login" aria-labelledby="login-title">
-      <svg class="gate" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-        <defs>
-          <linearGradient id="g-stone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a59a86"/><stop offset=".5" stop-color="#cfc5ae"/><stop offset="1" stop-color="#998e79"/></linearGradient>
-          <radialGradient id="g-glow" cx="50%" cy="55%" r="50%"><stop offset="0" stop-color="#fff6d6" stop-opacity=".95"/><stop offset="1" stop-color="#fff6d6" stop-opacity="0"/></radialGradient>
-        </defs>
-        <ellipse cx="400" cy="300" rx="330" ry="260" fill="url(#g-glow)"/>
-        <g stroke="#4a4136" stroke-width="5" opacity=".55">
-          <path d="M180 520 V230 Q400 40 620 230 V520" fill="none"/>
-          <line x1="240" y1="520" x2="240" y2="170"/><line x1="300" y1="520" x2="300" y2="128"/><line x1="360" y1="520" x2="360" y2="108"/>
-          <line x1="440" y1="520" x2="440" y2="108"/><line x1="500" y1="520" x2="500" y2="128"/><line x1="560" y1="520" x2="560" y2="170"/>
-          <line x1="180" y1="330" x2="620" y2="330"/>
-        </g>
-        <path d="M120 540 V220 Q400 -20 680 220 V540" fill="none" stroke="url(#g-stone)" stroke-width="54"/>
-        <path d="M120 540 V220 Q400 -20 680 220 V540" fill="none" stroke="#6f6553" stroke-width="54" stroke-dasharray="3 38" opacity=".45"/>
-        <rect x="70" y="200" width="100" height="26" rx="4" fill="#b7ad97"/><rect x="630" y="200" width="100" height="26" rx="4" fill="#b7ad97"/>
-        <g id="vines"></g>
-        <path d="M0 540 Q200 515 400 530 T800 525 V560 H0Z" fill="#6f9a5a"/>
-      </svg>
+      <div class="gate" aria-hidden="true"></div>
       <div class="tome login-book">
         <span class="corner tr"></span><span class="corner br"></span>
         <p class="login-eyebrow">숲속 마법학교 · 1학년 수학 원정</p>
@@ -248,19 +234,6 @@
     Forest.mountPouch($('pouch'));
     if (!enter(session.get())) $('screen-login').hidden = false;
 
-    /* 교문 덩굴 */
-    (function vines() {
-      const f1 = n => Math.round(n * 100) / 100;
-      let s = '';
-      const leaf = (x, y, rot, sc, col) => `<use href="#i-leaf" x="-10" y="-6" width="20" height="12" transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(rot)}) scale(${sc})" fill="${col}"/>`;
-      const cols = ['#5f8040', '#6f9a44', '#4a6d33', '#86ad5a'];
-      const along = (fx, n, off) => { for (let i = 0; i < n; i++) { const t = i / (n - 1), [x, y] = fx(t); s += leaf(x + Math.sin(i * 2.3) * 18, y + Math.cos(i * 1.7) * 10, (i * 67 + off) % 360, 1.2 + (i % 3) * .35, cols[i % 4]); } };
-      const arch = t => { const u = 1 - t; return [u * u * 120 + 2 * u * t * 400 + t * t * 680, u * u * 220 + 2 * u * t * -20 + t * t * 220]; };
-      s += `<path d="M120 540 V220 Q400 -20 680 220 V540" fill="none" stroke="#557a38" stroke-width="3" stroke-dasharray="40 14 60 20" opacity=".8"/>`;
-      along(arch, 34, 10); along(t => [120, 230 + t * 300], 14, 40); along(t => [680, 220 + t * 320], 12, 80);
-      for (let i = 0; i < 7; i++) { const [x, y] = arch(.1 + i * .13); s += `<circle cx="${f1(x + 8)}" cy="${f1(y + 14)}" r="4" fill="${i % 2 ? '#f2b6b0' : '#fbe8a6'}"/>`; }
-      $('vines').innerHTML = s;
-    })();
 
     /* ---------- 갈림길 ---------- */
     const root = document.getElementById('step-root'), plane = document.getElementById('step-plane'), sub = document.getElementById('hero-sub');
