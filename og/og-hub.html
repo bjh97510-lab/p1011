@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>마법 원정대 공유 카드</title>
+<!-- 오픈그래프 이미지 원본 (1200×630). 수정 후 README의 명령으로 og-image.png를 다시 만들 수 있어요. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap">
+<style>
+  :root {
+    --ink: #2f251a; --ink-soft: #574733; --forest: #294233; --moss: #5f8040; --moss-deep: #3c5a2c;
+    --bark: #8a5a32; --bark-deep: #573719; --paper: #f7f0dc; --sun: #e8b64a; --berry: #c2553f;
+    --c-arc: #d08a1e; --c-peri: #b04a38;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: "Jua", "Malgun Gothic", sans-serif; color: var(--ink); position: relative;
+    background:
+      radial-gradient(700px 480px at 8% 0%, rgba(170,205,150,.75), transparent 62%),
+      radial-gradient(640px 420px at 100% 10%, rgba(207,227,222,1), transparent 60%),
+      radial-gradient(560px 360px at 70% 115%, rgba(232,182,74,.35), transparent 60%),
+      #efe6cc;
+  }
+  body::before {
+    content: ""; position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42  0 0 0 0 .33  0 0 0 0 .2  0 0 0 .16 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .hills { position: absolute; left: 0; bottom: 0; width: 1200px; height: 150px; }
+  .frame { position: absolute; inset: 22px; border-radius: 28px; border: 3px dashed rgba(87,55,25,.28); }
+
+  .left { position: absolute; left: 76px; top: 70px; width: 600px; }
+  .eyebrow {
+    display: inline-block; padding: 8px 20px 6px; border-radius: 999px; font-size: 26px; color: #fff4dc;
+    background: linear-gradient(180deg, #9a6638, #7a4c26); border: 3px solid var(--bark-deep);
+    box-shadow: 0 4px 0 var(--bark-deep);
+  }
+  h1 { margin: 26px 0 0; font-weight: 400; font-size: 112px; line-height: 1.02; color: var(--forest); letter-spacing: -.01em;
+       text-shadow: 0 4px 0 rgba(255,250,235,.9); }
+  h2 { margin: 6px 0 0; font-weight: 400; font-size: 68px; line-height: 1.1; color: var(--bark); }
+  .tag { margin: 22px 0 0; font-size: 31px; line-height: 1.4; color: var(--ink-soft); }
+  .chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; width: 640px; }
+  .chip { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px 6px; border-radius: 999px; font-size: 25px;
+          background: rgba(255,251,238,.92); border: 2px solid #cdb98f; color: var(--ink); }
+  .chip svg { width: 30px; height: 30px; }
+
+  .book {
+    position: absolute; right: 70px; top: 62px; width: 420px; height: 470px; border-radius: 16px 22px 22px 16px;
+    background: radial-gradient(120% 90% at 50% 0%, rgba(255,255,255,.6), transparent 60%), linear-gradient(180deg, #f7f0dc, #ecdfbd);
+    box-shadow: 0 0 0 9px #7b3f2a, 0 0 0 12px #4e2618, 0 22px 40px rgba(50,30,15,.35);
+    transform: rotate(3deg);
+  }
+  .book::before { content: ""; position: absolute; left: -9px; top: -9px; bottom: -9px; width: 22px; border-radius: 12px 0 0 12px;
+    background: repeating-linear-gradient(180deg, #5c2b1c 0 22px, #8a4a30 22px 26px); }
+  .book svg.fig { position: absolute; left: 30px; top: 18px; width: 360px; height: 300px; }
+  .formula { position: absolute; left: 0; right: 0; top: 314px; text-align: center; font-size: 40px; color: var(--forest); }
+  .frac { display: inline-flex; flex-direction: column; vertical-align: middle; font-size: 27px; line-height: 1.1; margin: 0 4px; }
+  .frac span:first-child { border-bottom: 3px solid currentColor; padding: 0 4px; }
+  .formula small { display: block; font-size: 25px; color: var(--ink-soft); margin-top: 6px; }
+
+  .acorn-big { position: absolute; width: 128px; height: 128px; right: 420px; bottom: 50px; transform: rotate(-12deg); }
+  .stamp-big { position: absolute; width: 124px; height: 124px; right: 26px; bottom: 14px; transform: rotate(-10deg); }
+  .soot { position: absolute; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <radialGradient id="g-nut" cx="38%" cy="35%" r="70%"><stop offset="0" stop-color="#f0b56a"/><stop offset=".55" stop-color="#c47a35"/><stop offset="1" stop-color="#8a4c1c"/></radialGradient>
+    <linearGradient id="g-cap" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9b7447"/><stop offset="1" stop-color="#5e4024"/></linearGradient>
+    <pattern id="p-cap" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="url(#g-cap)"/><path d="M0 0H6M0 0V6" stroke="#4a3019" stroke-width="1.1" opacity=".55"/></pattern>
+    <radialGradient id="g-stamp" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#e47763"/><stop offset="1" stop-color="#b8412e"/></radialGradient>
+    <symbol id="i-acorn" viewBox="0 0 64 64">
+      <path d="M14 29 Q13 52 32 59 Q51 52 50 29 Z" fill="url(#g-nut)" stroke="#6e3c15" stroke-width="1.5"/>
+      <ellipse cx="22.5" cy="39" rx="3.5" ry="8" fill="#fff" opacity=".45" transform="rotate(12 22.5 39)"/>
+      <circle cx="26" cy="43" r="1.9" fill="#3b2410"/><circle cx="38" cy="43" r="1.9" fill="#3b2410"/>
+      <path d="M29.5 47 Q32 49.5 34.5 47" stroke="#3b2410" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <ellipse cx="22.5" cy="47" rx="3" ry="1.8" fill="#f28c7a" opacity=".6"/><ellipse cx="41.5" cy="47" rx="3" ry="1.8" fill="#f28c7a" opacity=".6"/>
+      <path d="M9 31 Q8 15 32 13 Q56 15 55 31 Q32 37 9 31 Z" fill="url(#p-cap)" stroke="#4a3019" stroke-width="1.6"/>
+      <path d="M31 14 Q29 7 35 3" stroke="#4a3019" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-stamp" viewBox="0 0 64 64">
+      <g fill="#f4b8b0" stroke="#d98579" stroke-width="1">
+        <ellipse cx="32" cy="9" rx="7" ry="9"/><ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(45 32 32)"/><ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(90 32 32)"/><ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(135 32 32)"/>
+        <ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(180 32 32)"/><ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(225 32 32)"/><ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(270 32 32)"/><ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(315 32 32)"/>
+      </g>
+      <path d="M12 52 Q4 44 8 36 Q16 42 12 52Z" fill="#6f9a44" stroke="#3c5a2c" stroke-width="1"/><path d="M52 52 Q60 44 56 36 Q48 42 52 52Z" fill="#6f9a44" stroke="#3c5a2c" stroke-width="1"/>
+      <circle cx="32" cy="32" r="18" fill="url(#g-stamp)"/><circle cx="32" cy="32" r="15" fill="none" stroke="#fde9d6" stroke-width="1.5" stroke-dasharray="2 2.2"/>
+      <path d="M25 29 Q27 26 29 29" stroke="#fff4e4" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M35 29 Q37 26 39 29" stroke="#fff4e4" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M25 35 Q32 42 39 35" stroke="#fff4e4" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="i-soot" viewBox="0 0 40 40">
+      <circle cx="20" cy="22" r="13" fill="#231f1c" stroke="#231f1c" stroke-width="7" stroke-dasharray="1.2 2.1" stroke-linecap="round"/>
+      <circle cx="15" cy="20" r="4.4" fill="#fff"/><circle cx="25" cy="20" r="4.4" fill="#fff"/><circle cx="15.6" cy="20.6" r="2" fill="#111"/><circle cx="25.6" cy="20.6" r="2" fill="#111"/>
+    </symbol>
+  </defs>
+</svg>
+
+<svg class="hills" viewBox="0 0 1200 150" preserveAspectRatio="none">
+  <path d="M0 90 Q150 40 300 75 T620 60 T900 70 T1200 50 V150 H0Z" fill="#9dbb85" opacity=".45"/>
+  <path d="M0 118 Q200 80 380 106 T760 98 T1200 92 V150 H0Z" fill="#6f9a5a" opacity=".4"/>
+</svg>
+<div class="frame"></div>
+
+<div class="left">
+  <span class="eyebrow">중학교 1학년 수학 · 숲속 마법학교</span>
+  <h1>마법 원정대</h1>
+  <h2>도형의 숲</h2>
+  <p class="tag">평면도형부터 3D 입체도형까지!<br>돌려 보고, 잘라 보고, 펼쳐 보며 배워 봐.</p>
+  <div class="chips">
+    <span class="chip">다각형</span>
+    <span class="chip">원과 부채꼴</span>
+    <span class="chip">입체도형 · 전개도</span>
+    <span class="chip">겉넓이 · 부피</span>
+    <span class="chip"><svg><use href="#i-acorn"/></svg>도토리 · <svg><use href="#i-stamp"/></svg>칭찬도장</span>
+  </div>
+</div>
+
+<div class="book">
+  <svg class="fig" viewBox="0 0 360 300">
+    <g stroke="#573719" stroke-width="3" stroke-linejoin="round">
+      <polygon points="30,110 105,80 170,104 95,136" fill="#f4d68a"/>
+      <polygon points="30,110 95,136 95,236 30,210" fill="#e0b25a"/>
+      <polygon points="95,136 170,104 170,204 95,236" fill="#c9923d"/>
+    </g>
+    <g stroke="#2e4520" stroke-width="3">
+      <path d="M200 92 L200 206 A55 17 0 0 0 310 206 L310 92" fill="#9fc483"/>
+      <ellipse cx="255" cy="92" rx="55" ry="17" fill="#c8e0b0"/>
+    </g>
+    <polygon points="245,30 278,10 312,30 300,66 258,66" fill="#f4e3b0" stroke="#8a5a32" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M20 160 L190 118" stroke="#c2553f" stroke-width="3" stroke-dasharray="8 6"/>
+  </svg>
+  <div class="formula">V = (밑넓이) × (높이)<small>전개도 · 겉넓이 · 부피를 3D로</small></div>
+</div>
+
+<svg class="acorn-big"><use href="#i-acorn"/></svg>
+<svg class="stamp-big"><use href="#i-stamp"/></svg>
+<svg class="soot" style="left:640px;bottom:40px;width:56px;height:56px"><use href="#i-soot"/></svg>
+<svg class="soot" style="left:700px;bottom:30px;width:40px;height:40px"><use href="#i-soot"/></svg>
+<svg class="soot" style="left:560px;bottom:28px;width:46px;height:46px"><use href="#i-soot"/></svg>
+</body>
+</html>

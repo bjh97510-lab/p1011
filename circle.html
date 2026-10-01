@@ -1,0 +1,2611 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>마법 원정대: 원과 부채꼴</title>
+  <meta name="description" content="중학교 1학년 '원과 부채꼴' 단원을 숲속 마법학교 퀘스트로 배워요. 용어 카드 9장, 반지름·중심각을 바꿔 보는 공식 실험실, 20문항 챌린지에서 도토리와 칭찬도장을 모아 보세요.">
+  <meta name="theme-color" content="#5f8040">
+
+  <!-- 오픈그래프: 카카오톡·밴드·페이스북 등에 링크를 공유할 때 보이는 미리보기 -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="숲속 마법학교">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:url" content="https://bjh97510-lab.github.io/p1011/circle.html">
+  <meta property="og:title" content="마법 원정대: 원과 부채꼴">
+  <meta property="og:description" content="중1 수학 원과 부채꼴! 공식을 주문처럼 익히고, 20개의 징검다리를 건너 도토리와 칭찬도장을 모아 봐!">
+  <meta property="og:image" content="https://bjh97510-lab.github.io/p1011/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="마법 원정대: 원과 부채꼴 — 중심각 120°인 부채꼴 그림과 호의 길이 공식, 도토리와 칭찬도장이 그려진 숲속 마법학교 카드">
+
+  <!-- 트위터(X) 카드 -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="마법 원정대: 원과 부채꼴">
+  <meta name="twitter:description" content="중1 수학 원과 부채꼴! 공식을 주문처럼 익히고, 20개의 징검다리를 건너 도토리와 칭찬도장을 모아 봐!">
+  <meta name="twitter:image" content="https://bjh97510-lab.github.io/p1011/og-image.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      corePlugins: { preflight: true },
+      theme: {
+        extend: {
+          fontFamily: {
+            story: ['Jua', '"Apple SD Gothic Neo"', '"Malgun Gothic"', 'sans-serif'],
+            body: ['Jua', '"Apple SD Gothic Neo"', '"Malgun Gothic"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Layout: 숲속 마법학교 — 나무 간판 헤더 + 양장본 카드 본문, 좁은 화면에서는 한 줄로 쌓임.
+   Single warm-watercolor theme by choice: every color is explicit so it reads on any host background. */
+    :root {
+      color-scheme: light;
+      --paper: #f7f0dc;
+      /* 양피지 */
+      --paper-deep: #ecdfbd;
+      --ink: #2f251a;
+      /* 먹색 글씨 */
+      --ink-soft: #574733;
+      --moss: #5f8040;
+      /* 이끼 */
+      --moss-deep: #3c5a2c;
+      --forest: #294233;
+      --bark: #8a5a32;
+      /* 나무껍질 */
+      --bark-deep: #573719;
+      --acorn: #b06d2f;
+      --sun: #e8b64a;
+      /* 햇살 */
+      --sky: #cfe3de;
+      --berry: #c2553f;
+      /* 오답, 도장 인주 */
+      --petal: #f2b6b0;
+      --line: #9c8a6c;
+      --hl: #e0a33a;
+      --hl-fill: rgba(232, 182, 74, .38);
+      --c-circ: #3f7fa0;
+      /* 원의 둘레 */
+      --c-area: rgba(95, 145, 175, .16);
+      --c-arc: #d08a1e;
+      /* 호 */
+      --c-sector: rgba(111, 150, 70, .42);
+      --c-peri: #b04a38;
+      /* 부채꼴 둘레 */
+      --font-story: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      /* 동글동글 제목·문제 글씨 */
+      --font-body: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      /* 본문도 동글동글하고 또렷한 Jua */
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    html {
+      font-size: 17px;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      color: var(--ink);
+      background:
+        radial-gradient(60rem 40rem at 10% -10%, rgba(170, 205, 150, .55), transparent 60%),
+        radial-gradient(50rem 36rem at 100% 0%, rgba(207, 227, 222, .9), transparent 60%),
+        radial-gradient(40rem 30rem at 50% 110%, rgba(232, 182, 74, .25), transparent 60%),
+        #efe6cc;
+      font-size: 18px;
+      letter-spacing: .01em;
+      font-synthesis: none;
+      /* Jua는 굵기가 하나뿐이라 가짜 굵게를 끔 */
+      line-height: 1.65;
+    }
+
+    body::before {
+      /* 수채화 종이 질감 */
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .42  0 0 0 0 .33  0 0 0 0 .2  0 0 0 .14 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      opacity: .8;
+    }
+
+    .hills {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 180px;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      padding-inline: 16px;
+      padding-block: 16px 48px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    h1,
+    h2,
+    h3,
+    .story {
+      font-family: var(--font-story);
+      text-wrap: balance;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--sun);
+      outline-offset: 3px;
+      border-radius: 8px;
+    }
+
+    .tabnum {
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ---------- 나무 판자 버튼 ---------- */
+    .plank {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: .7rem 1.3rem;
+      border-radius: 12px 16px 13px 15px;
+      color: #fff7e6;
+      font-family: var(--font-story);
+      font-weight: 700;
+      letter-spacing: .02em;
+      background:
+        repeating-linear-gradient(92deg, rgba(0, 0, 0, .0) 0 14px, rgba(60, 30, 10, .12) 14px 15px, rgba(0, 0, 0, 0) 15px 31px),
+        linear-gradient(180deg, #a8713f, #86552b 55%, #6c4220);
+      border: 2px solid var(--bark-deep);
+      box-shadow: inset 0 2px 0 rgba(255, 230, 190, .35), inset 0 -3px 0 rgba(40, 20, 5, .35), 0 3px 0 var(--bark-deep), 0 6px 12px rgba(60, 35, 10, .25);
+      text-shadow: 0 1px 0 rgba(40, 20, 5, .6);
+      cursor: pointer;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s;
+    }
+
+    .plank::before,
+    .plank::after {
+      /* 못 자국 */
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 6px;
+      height: 6px;
+      margin-top: -3px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #d9c7a0, #5b4a33);
+    }
+
+    .plank::before {
+      left: 8px;
+    }
+
+    .plank::after {
+      right: 8px;
+    }
+
+    .plank:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .plank:active {
+      transform: translateY(2px);
+      box-shadow: inset 0 2px 0 rgba(255, 230, 190, .25), inset 0 -2px 0 rgba(40, 20, 5, .35), 0 1px 0 var(--bark-deep);
+    }
+
+    .plank[disabled] {
+      filter: grayscale(.6) brightness(.9);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .plank.moss {
+      background: repeating-linear-gradient(92deg, rgba(0, 0, 0, 0) 0 14px, rgba(10, 30, 10, .12) 14px 15px, rgba(0, 0, 0, 0) 15px 31px), linear-gradient(180deg, #7aa052, #5f8040 55%, #466330);
+      border-color: #2e4520;
+      box-shadow: inset 0 2px 0 rgba(230, 255, 200, .3), inset 0 -3px 0 rgba(10, 30, 5, .35), 0 3px 0 #2e4520, 0 6px 12px rgba(30, 50, 20, .25);
+    }
+
+    .plank.small {
+      padding: .45rem .95rem;
+      font-size: .92rem;
+    }
+
+    .plank.ghost {
+      background: rgba(255, 248, 230, .7);
+      color: var(--bark-deep);
+      text-shadow: none;
+      border-style: dashed;
+      box-shadow: none;
+    }
+
+    .plank.ghost::before,
+    .plank.ghost::after {
+      display: none;
+    }
+
+    /* ---------- 양장본 카드 ---------- */
+    .tome {
+      position: relative;
+      border-radius: 10px 14px 14px 10px;
+      background:
+        radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, .55), transparent 60%),
+        linear-gradient(180deg, var(--paper), var(--paper-deep));
+      border: 1px solid #c9b58c;
+      box-shadow: 0 0 0 6px #7b3f2a, 0 0 0 8px #4e2618, 0 14px 30px rgba(50, 30, 15, .3);
+    }
+
+    .tome::before {
+      /* 책등 */
+      content: "";
+      position: absolute;
+      left: -6px;
+      top: -6px;
+      bottom: -6px;
+      width: 16px;
+      border-radius: 8px 0 0 8px;
+      background: repeating-linear-gradient(180deg, #5c2b1c 0 18px, #8a4a30 18px 21px);
+    }
+
+    .tome .corner {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border: 3px solid #b38b3e;
+      background: linear-gradient(135deg, #e5c77a, #9c7330);
+      z-index: 2;
+    }
+
+    .tome .corner.tr {
+      top: -8px;
+      right: -8px;
+      border-radius: 0 10px 0 22px;
+    }
+
+    .tome .corner.br {
+      bottom: -8px;
+      right: -8px;
+      border-radius: 0 0 10px 0;
+      clip-path: polygon(100% 0, 100% 100%, 0 100%);
+    }
+
+    .tome .corner.tr {
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+
+    .parchment {
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 251, 238, .92), rgba(246, 236, 208, .92));
+      border: 1px solid #d8c69c;
+      box-shadow: 0 6px 16px rgba(80, 55, 25, .12);
+    }
+
+    /* ---------- 로그인: 덩굴 교문 ---------- */
+    #screen-login {
+      min-height: calc(100vh - 32px);
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+
+    .gate {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .login-book {
+      position: relative;
+      z-index: 2;
+      width: min(440px, 100%);
+      padding: 2rem 1.6rem 1.6rem 2.1rem;
+    }
+
+    .login-title {
+      font-size: clamp(1.7rem, 5vw, 2.3rem);
+      line-height: 1.25;
+      color: var(--forest);
+    }
+
+    .home-link {
+      display: inline-block;
+      margin-bottom: .4rem;
+      font-size: .85rem;
+      color: var(--moss-deep);
+      text-decoration: none;
+    }
+
+    .home-link:hover { text-decoration: underline; }
+    .home-link.light { color: #fff4dc; opacity: .9; margin-bottom: .1rem; }
+
+    .eyebrow {
+      font-size: .78rem;
+      letter-spacing: .18em;
+      color: var(--moss-deep);
+    }
+
+    .sid-input {
+      width: 100%;
+      font-family: var(--font-story);
+      font-size: 1.8rem;
+      letter-spacing: .35em;
+      text-align: center;
+      padding: .6rem .8rem;
+      border-radius: 10px;
+      color: var(--ink);
+      background: repeating-linear-gradient(180deg, transparent 0 34px, rgba(120, 90, 50, .18) 34px 35px), #fffaf0;
+      border: 2px solid #bda679;
+    }
+
+    .sid-input:focus {
+      outline: none;
+      border-color: var(--moss);
+      box-shadow: 0 0 0 4px rgba(95, 128, 64, .25);
+    }
+
+    .sid-parse {
+      min-height: 1.6em;
+      font-size: .95rem;
+    }
+
+    .err {
+      color: var(--berry);
+    }
+
+    /* ---------- 헤더 간판 ---------- */
+    .signboard {
+      position: relative;
+      border-radius: 14px;
+      padding: .8rem 1rem;
+      background:
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0) 0 22px, rgba(50, 25, 8, .18) 22px 23px),
+        repeating-linear-gradient(90deg, rgba(255, 255, 255, .04) 0 3px, rgba(0, 0, 0, .04) 3px 7px),
+        linear-gradient(180deg, #9a6638, #7a4c26);
+      border: 3px solid var(--bark-deep);
+      box-shadow: inset 0 2px 0 rgba(255, 220, 170, .3), 0 8px 18px rgba(60, 35, 10, .28);
+      color: #fff4dc;
+    }
+
+    .signboard h1 {
+      font-size: clamp(1.15rem, 3.2vw, 1.55rem);
+      margin: 0;
+      text-shadow: 0 2px 0 rgba(40, 20, 5, .5);
+    }
+
+    .tabbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .tab {
+      padding: .45rem .9rem;
+      border-radius: 10px;
+      font-family: var(--font-story);
+      font-weight: 700;
+      font-size: .95rem;
+      color: #f8e9cc;
+      background: rgba(40, 20, 5, .28);
+      border: 1px solid rgba(255, 220, 170, .25);
+      cursor: pointer;
+    }
+
+    .tab[aria-selected="true"] {
+      background: var(--paper);
+      color: var(--bark-deep);
+      border-color: var(--paper);
+      box-shadow: 0 2px 0 var(--bark-deep);
+    }
+
+    .pouch {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    .pouch-item {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      padding: .25rem .65rem .25rem .35rem;
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink);
+      font-weight: 700;
+      box-shadow: inset 0 -2px 0 rgba(120, 80, 30, .2);
+    }
+
+    .pouch-item svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    .bump {
+      animation: bump .5s ease;
+    }
+
+    @keyframes bump {
+      0% {
+        transform: scale(1)
+      }
+
+      40% {
+        transform: scale(1.25)
+      }
+
+      100% {
+        transform: scale(1)
+      }
+    }
+
+    /* ---------- 섹션 공통 ---------- */
+    .section-title {
+      font-size: clamp(1.35rem, 3.6vw, 1.8rem);
+      color: var(--forest);
+      margin: 0;
+    }
+
+    .lead {
+      color: var(--ink-soft);
+      max-width: 62ch;
+    }
+
+    /* 용어 카드 */
+    .term-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    }
+
+    .term {
+      padding: 14px 14px 16px;
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .term svg {
+      width: 96px;
+      height: 80px;
+    }
+
+    .term h3 {
+      margin: 0;
+      font-size: 1.12rem;
+      color: var(--moss-deep);
+    }
+
+    .term h3 small {
+      font-family: var(--font-body);
+      font-weight: 400;
+      color: var(--ink-soft);
+      font-size: .8rem;
+      margin-left: .25rem;
+    }
+
+    .term p {
+      margin: .15rem 0 0;
+      font-size: .93rem;
+      line-height: 1.55;
+    }
+
+    .s-base {
+      stroke: var(--line);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .s-hl {
+      stroke: var(--hl);
+      stroke-width: 4.5;
+      fill: none;
+      stroke-linecap: round;
+    }
+
+    .f-hl {
+      fill: var(--hl-fill);
+      stroke: var(--hl);
+      stroke-width: 2;
+    }
+
+    .f-dot {
+      fill: var(--ink);
+    }
+
+    .t-lab {
+      fill: var(--ink);
+      font: 700 12px var(--font-story);
+    }
+
+    .t-small {
+      fill: var(--ink-soft);
+      font: 11px var(--font-story);
+    }
+
+    .s-dash {
+      stroke: var(--line);
+      stroke-width: 1.6;
+      stroke-dasharray: 4 4;
+      fill: none;
+    }
+
+    .arcsym {
+      position: relative;
+      display: inline-block;
+      padding-top: .3em;
+    }
+
+    .arcsym::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: .05em;
+      height: .45em;
+      border: 1.6px solid currentColor;
+      border-bottom: none;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    }
+
+    /* 시뮬레이터 */
+    .sim {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      padding: 18px;
+    }
+
+    @media (max-width: 820px) {
+      .sim {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .sim-canvas {
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 1;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .slider-row {
+      display: grid;
+      gap: .35rem;
+    }
+
+    .slider-row label {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-family: var(--font-story);
+      font-weight: 700;
+    }
+
+    .slider-row output {
+      font-size: 1.35rem;
+      color: var(--bark-deep);
+    }
+
+    input[type="range"].leaf {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 34px;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    input[type="range"].leaf::-webkit-slider-runnable-track {
+      height: 8px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #8f6337, #6a4523);
+      box-shadow: inset 0 1px 0 rgba(255, 220, 170, .35);
+    }
+
+    input[type="range"].leaf::-moz-range-track {
+      height: 8px;
+      border-radius: 6px;
+      background: linear-gradient(180deg, #8f6337, #6a4523);
+    }
+
+    input[type="range"].leaf::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 38px;
+      height: 30px;
+      margin-top: -11px;
+      border: none;
+      background: transparent no-repeat center / contain;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 30'><path d='M3 24 C4 10 16 2 35 3 C34 20 22 28 3 24Z' fill='%236b9a3f' stroke='%233c5a2c' stroke-width='1.6'/><path d='M4 24 C14 18 22 12 32 5' stroke='%23e9f2c8' stroke-width='1.6' fill='none'/></svg>");
+      filter: drop-shadow(0 2px 1px rgba(40, 30, 10, .35));
+    }
+
+    input[type="range"].leaf::-moz-range-thumb {
+      width: 38px;
+      height: 30px;
+      border: none;
+      background: transparent no-repeat center / contain;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 30'><path d='M3 24 C4 10 16 2 35 3 C34 20 22 28 3 24Z' fill='%236b9a3f' stroke='%233c5a2c' stroke-width='1.6'/><path d='M4 24 C14 18 22 12 32 5' stroke='%23e9f2c8' stroke-width='1.6' fill='none'/></svg>");
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+    }
+
+    .chip {
+      padding: .15rem .6rem;
+      border-radius: 999px;
+      border: 1px solid #c9b58c;
+      background: #fffaf0;
+      font-size: .85rem;
+      cursor: pointer;
+      color: var(--ink);
+    }
+
+    .chip:hover {
+      border-color: var(--moss);
+    }
+
+    .formula {
+      display: grid;
+      grid-template-columns: 14px minmax(0, 1fr);
+      gap: .1rem .7rem;
+      padding: .7rem .8rem;
+      border-radius: 12px;
+      background: rgba(255, 251, 238, .75);
+      border: 1px solid #dccca4;
+    }
+
+    .formula .sw {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      margin-top: .3rem;
+    }
+
+    .formula .name {
+      font-family: var(--font-story);
+      font-weight: 700;
+      color: var(--forest);
+    }
+
+    .formula .eq {
+      font-family: var(--font-story);
+      font-size: 1.02rem;
+    }
+
+    .formula .sub {
+      color: var(--ink-soft);
+      font-size: .92rem;
+      overflow-wrap: anywhere;
+    }
+
+    .formula .res {
+      font-weight: 700;
+      color: var(--bark-deep);
+    }
+
+    .frac {
+      display: inline-flex;
+      flex-direction: column;
+      vertical-align: middle;
+      text-align: center;
+      font-size: .82em;
+      line-height: 1.05;
+      margin: 0 .1em;
+    }
+
+    .frac>span:first-child {
+      border-bottom: 1.4px solid currentColor;
+      padding: 0 .15em;
+    }
+
+    /* ---------- 챌린지 숲 ---------- */
+    .trail {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+      .trail {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .trail-group {
+      padding: .5rem .6rem .6rem;
+      border-radius: 12px;
+      background: rgba(255, 251, 238, .55);
+      border: 1px dashed #c3ae82;
+    }
+
+    .trail-group .gname {
+      font-family: var(--font-story);
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--moss-deep);
+      letter-spacing: .02em;
+    }
+
+    .stones {
+      display: flex;
+      gap: 6px;
+      margin-top: .3rem;
+      flex-wrap: wrap;
+    }
+
+    /* 징검다리 = 도토리 버튼: 안 푼 문제는 덜 익은 도토리, 맞히면 잘 익은 도토리 */
+    .stones {
+      gap: 4px;
+    }
+
+    .stone {
+      position: relative;
+      width: 40px;
+      height: 50px;
+      padding: 0;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transform-origin: 50% 20%;
+      transition: transform .15s ease;
+    }
+
+    .stone svg {
+      width: 40px;
+      height: 50px;
+      display: block;
+      overflow: visible;
+      filter: drop-shadow(0 2px 1.5px rgba(70, 45, 15, .28));
+    }
+
+    .stone .nut {
+      fill: url(#g-nut-raw);
+      stroke: #a89a6c;
+      stroke-width: 1.3;
+    }
+
+    .stone .cap {
+      fill: url(#p-cap-raw);
+      stroke: #8c7c55;
+      stroke-width: 1.3;
+    }
+
+    .stone .stem {
+      stroke: #8c7c55;
+    }
+
+    .stone .shine {
+      fill: #fff;
+      opacity: .5;
+    }
+
+    .stone .leaf {
+      display: none;
+    }
+
+    .stone .num {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 27px;
+      text-align: center;
+      font-family: var(--font-story);
+      font-weight: 700;
+      font-size: .92rem;
+      line-height: 1;
+      color: #5b5238;
+    }
+
+    .stone:hover {
+      transform: rotate(-8deg);
+    }
+
+    .stone.correct .nut {
+      fill: url(#g-nut);
+      stroke: #6e3c15;
+    }
+
+    .stone.correct .cap {
+      fill: url(#p-cap);
+      stroke: #4a3019;
+    }
+
+    .stone.correct .stem {
+      stroke: #4a3019;
+    }
+
+    .stone.correct .leaf {
+      display: inline;
+    }
+
+    .stone.correct .num {
+      color: #fff6e2;
+      text-shadow: 0 1px 1px rgba(60, 25, 5, .7);
+    }
+
+    .stone.wrong .nut {
+      fill: url(#g-nut-wrong);
+      stroke: #93402d;
+    }
+
+    .stone.wrong .num {
+      color: #fff3ec;
+      text-shadow: 0 1px 1px rgba(90, 20, 10, .6);
+    }
+
+    .stone.current svg {
+      filter: drop-shadow(0 0 5px rgba(232, 182, 74, .95)) drop-shadow(0 0 2px rgba(232, 182, 74, .9));
+    }
+
+    .stone.current {
+      animation: sway 1.8s ease-in-out infinite;
+    }
+
+    @keyframes sway {
+
+      0%,
+      100% {
+        transform: rotate(-6deg);
+      }
+
+      50% {
+        transform: rotate(6deg);
+      }
+    }
+
+    .forest-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .forest-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .qcard {
+      padding: 22px 20px 20px 26px;
+    }
+
+    .qmeta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .badge {
+      font-size: .78rem;
+      letter-spacing: .08em;
+      padding: .1rem .6rem;
+      border-radius: 999px;
+      background: rgba(95, 128, 64, .16);
+      color: var(--moss-deep);
+      font-weight: 700;
+    }
+
+    .qnum {
+      font-family: var(--font-story);
+      font-weight: 700;
+      color: var(--bark);
+    }
+
+    .qtext {
+      font-family: var(--font-story);
+      font-size: clamp(1.08rem, 2.6vw, 1.28rem);
+      line-height: 1.7;
+      margin: .6rem 0 .4rem;
+    }
+
+    .qfig {
+      width: 100%;
+      max-width: 260px;
+      display: block;
+      margin: .3rem auto .6rem;
+    }
+
+    .opts {
+      display: grid;
+      gap: .55rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 520px) {
+      .opts {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .opt {
+      text-align: left;
+      padding: .7rem .9rem;
+      border-radius: 12px;
+      background: #fffaf0;
+      border: 2px solid #cdb98f;
+      color: var(--ink);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      gap: .6rem;
+      align-items: center;
+      transition: transform .1s, border-color .1s;
+    }
+
+    .opt:hover:not([disabled]) {
+      border-color: var(--moss);
+      transform: translateY(-1px);
+    }
+
+    .opt .mark {
+      flex: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-family: var(--font-story);
+      font-weight: 700;
+      background: var(--paper-deep);
+      color: var(--bark-deep);
+    }
+
+    .opt.is-wrong {
+      border-color: var(--berry);
+      background: #fbe9e3;
+      opacity: .75;
+    }
+
+    .opt.is-right {
+      border-color: var(--moss);
+      background: #eaf4dc;
+    }
+
+    .opt[disabled] {
+      cursor: default;
+    }
+
+    .short-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+    }
+
+    .ans-input {
+      flex: 1 1 180px;
+      min-width: 0;
+      font-family: var(--font-story);
+      font-size: 1.3rem;
+      padding: .5rem .8rem;
+      border-radius: 10px;
+      background: #fffaf0;
+      border: 2px solid #cdb98f;
+      color: var(--ink);
+    }
+
+    .ans-input:focus {
+      outline: none;
+      border-color: var(--moss);
+      box-shadow: 0 0 0 4px rgba(95, 128, 64, .22);
+    }
+
+    .ans-input.is-wrong {
+      border-color: var(--berry);
+      animation: shake .4s;
+    }
+
+    .unit {
+      font-family: var(--font-story);
+      color: var(--ink-soft);
+    }
+
+    .keypad {
+      display: flex;
+      gap: .35rem;
+      flex-wrap: wrap;
+    }
+
+    .key {
+      min-width: 40px;
+      padding: .35rem .6rem;
+      border-radius: 8px;
+      border: 1px solid #bda679;
+      background: var(--paper-deep);
+      font-family: var(--font-story);
+      font-weight: 700;
+      color: var(--bark-deep);
+      cursor: pointer;
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      25% {
+        transform: translateX(-6px)
+      }
+
+      75% {
+        transform: translateX(6px)
+      }
+    }
+
+    .feedback {
+      border-radius: 12px;
+      padding: .8rem 1rem;
+      margin-top: .9rem;
+    }
+
+    .feedback.good {
+      background: #e6f1d6;
+      border: 1px solid #a9c78a;
+    }
+
+    .feedback.bad {
+      background: #fbeae3;
+      border: 1px solid #e3b3a3;
+    }
+
+    .feedback h4 {
+      margin: 0;
+      font-family: var(--font-story);
+      font-size: 1.1rem;
+    }
+
+    .hint-box {
+      margin-top: .5rem;
+      padding: .6rem .8rem;
+      border-radius: 10px;
+      background: #fff7df;
+      border: 1px dashed var(--sun);
+    }
+
+    /* 마법사 & 먼지 요정 */
+    .companion {
+      padding: 14px;
+      display: grid;
+      justify-items: center;
+      gap: .4rem;
+    }
+
+    .bubble {
+      position: relative;
+      background: #fffdf5;
+      border: 2px solid #cdb98f;
+      border-radius: 16px;
+      padding: .55rem .8rem;
+      font-family: var(--font-story);
+      font-size: .98rem;
+      text-align: center;
+      min-height: 3.2em;
+      width: 100%;
+    }
+
+    .bubble::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -10px;
+      width: 16px;
+      height: 16px;
+      margin-left: -8px;
+      background: #fffdf5;
+      border-right: 2px solid #cdb98f;
+      border-bottom: 2px solid #cdb98f;
+      transform: rotate(45deg);
+    }
+
+    .wizard {
+      width: 150px;
+      height: 170px;
+      overflow: visible;
+    }
+
+    .w-head {
+      transform-box: view-box;
+      transform-origin: 70px 98px;
+    }
+
+    .wizard.tilt .w-head {
+      animation: tilt 1.3s ease-in-out;
+    }
+
+    @keyframes tilt {
+      0% {
+        transform: rotate(0)
+      }
+
+      25% {
+        transform: rotate(-14deg)
+      }
+
+      55% {
+        transform: rotate(-14deg)
+      }
+
+      75% {
+        transform: rotate(6deg)
+      }
+
+      100% {
+        transform: rotate(0)
+      }
+    }
+
+    .wizard.cheer .w-body {
+      animation: hop .7s ease;
+      transform-box: view-box;
+      transform-origin: 70px 165px;
+    }
+
+    .wizard.cheer .w-head {
+      animation: hop .7s ease;
+    }
+
+    @keyframes hop {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      40% {
+        transform: translateY(-10px)
+      }
+    }
+
+    .sprites {
+      display: flex;
+      gap: 6px;
+      align-items: flex-end;
+      height: 36px;
+    }
+
+    .sprite {
+      width: 30px;
+      height: 30px;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+
+    .sprite:nth-child(2) {
+      width: 24px;
+      height: 24px;
+      animation-delay: .4s;
+    }
+
+    .sprite:nth-child(3) {
+      width: 34px;
+      height: 34px;
+      animation-delay: .9s;
+    }
+
+    .sprites.jump .sprite {
+      animation: jump .6s ease 2;
+    }
+
+    @keyframes bob {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-4px)
+      }
+    }
+
+    @keyframes jump {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      45% {
+        transform: translateY(-16px) rotate(8deg)
+      }
+    }
+
+    /* 도토리 날아가기 & 모달 */
+    .flyer {
+      position: fixed;
+      width: 44px;
+      height: 44px;
+      z-index: 60;
+      pointer-events: none;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      background: rgba(40, 35, 20, .45);
+    }
+
+    .modal-card {
+      width: min(420px, 100%);
+      padding: 1.6rem 1.4rem 1.4rem 1.9rem;
+      text-align: center;
+    }
+
+    .ex-stage {
+      position: relative;
+      height: 150px;
+      margin: 0 auto .6rem;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .ex-acorn {
+      position: absolute;
+      top: 45px;
+      width: 46px;
+      height: 46px;
+      transition: transform .7s cubic-bezier(.5, -0.3, .6, 1), opacity .3s .6s;
+    }
+
+    .ex-stage.merge .ex-acorn {
+      transform: translateX(var(--dx)) scale(.4) rotate(200deg);
+      opacity: 0;
+    }
+
+    .ex-stamp {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 120px;
+      height: 120px;
+      margin: -60px 0 0 -60px;
+      transform: scale(0);
+    }
+
+    .ex-stage.pop .ex-stamp {
+      animation: stampIn .7s cubic-bezier(.2, 1.6, .4, 1) forwards;
+    }
+
+    @keyframes stampIn {
+      0% {
+        transform: scale(0) rotate(-30deg)
+      }
+
+      100% {
+        transform: scale(1) rotate(-8deg)
+      }
+    }
+
+    .burst {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      margin: -6px;
+      border-radius: 60% 0 60% 0;
+      pointer-events: none;
+    }
+
+    .pang {
+      position: absolute;
+      font-family: var(--font-story);
+      font-weight: 700;
+      color: var(--berry);
+      font-size: 1.3rem;
+      opacity: 0;
+    }
+
+    .ex-stage.pop .pang {
+      animation: pang .9s ease .2s forwards;
+    }
+
+    @keyframes pang {
+      0% {
+        opacity: 0;
+        transform: scale(.5)
+      }
+
+      40% {
+        opacity: 1;
+        transform: scale(1.15)
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(1) translateY(-12px)
+      }
+    }
+
+    /* 보상 보드: 도토리 주머니 + 칭찬 도장판 */
+    .reward-board {
+      display: grid;
+      gap: 14px 28px;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+      padding: 16px 20px;
+    }
+
+    @media (max-width: 700px) {
+      .reward-board {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .reward-board h3 {
+      margin: 0;
+      font-size: 1.12rem;
+      color: var(--forest);
+    }
+
+    .reward-board h3 .cnt {
+      font-family: var(--font-body);
+      font-size: .95rem;
+      color: var(--ink-soft);
+      margin-left: .3rem;
+    }
+
+    .reward-board p {
+      margin: .15rem 0 .6rem;
+      font-size: .9rem;
+      color: var(--ink-soft);
+    }
+
+    .reward-board p b {
+      color: var(--bark-deep);
+    }
+
+    .acorn-slots {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .acorn-slot {
+      width: 42px;
+      height: 42px;
+    }
+
+    .acorn-slot.empty {
+      filter: grayscale(1) brightness(1.55);
+      opacity: .35;
+    }
+
+    .acorn-slot.new {
+      animation: acornIn .6s cubic-bezier(.2, 1.6, .4, 1);
+    }
+
+    @keyframes acornIn {
+      0% {
+        transform: scale(0) rotate(-40deg);
+      }
+
+      100% {
+        transform: scale(1) rotate(0);
+      }
+    }
+
+    .acorn-ratio {
+      font-family: var(--font-story);
+      font-weight: 700;
+      color: var(--bark-deep);
+      margin-left: .3rem;
+    }
+
+    .stamp-slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .stamp-slot {
+      position: relative;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 2.5px dashed #d2c6a3;
+      color: #a3957a;
+      font-size: .78rem;
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+      background: rgba(255, 250, 235, .6);
+    }
+
+    .stamp-slot.filled {
+      border-color: transparent;
+      background: transparent;
+    }
+
+    .stamp-slot svg {
+      width: 70px;
+      height: 70px;
+      transform: rotate(var(--rot, -8deg));
+    }
+
+    .stamp-slot.new svg {
+      animation: stampDown .55s cubic-bezier(.3, 1.5, .5, 1);
+    }
+
+    .stamp-slot.new::after {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 3px solid var(--petal);
+      animation: ring .7s ease-out forwards;
+    }
+
+    @keyframes stampDown {
+      0% {
+        transform: scale(1.9) rotate(-30deg);
+        opacity: 0;
+      }
+
+      60% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1) rotate(var(--rot, -8deg));
+      }
+    }
+
+    @keyframes ring {
+      from {
+        transform: scale(.8);
+        opacity: 1;
+      }
+
+      to {
+        transform: scale(1.4);
+        opacity: 0;
+      }
+    }
+
+    /* 우편함 */
+    .stat-row {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @media (max-width: 640px) {
+      .stat-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .stat {
+      padding: .7rem .9rem;
+      border-radius: 12px;
+      background: rgba(255, 251, 238, .8);
+      border: 1px solid #dccca4;
+    }
+
+    .stat .k {
+      font-size: .82rem;
+      color: var(--ink-soft);
+    }
+
+    .stat .v {
+      font-family: var(--font-story);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--bark-deep);
+    }
+
+    .code {
+      font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+      font-size: .85rem;
+      background: #2d2a22;
+      color: #f3ead3;
+      border-radius: 10px;
+      padding: .8rem 1rem;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .log {
+      display: grid;
+      gap: .35rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .log li {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: baseline;
+      font-size: .9rem;
+      padding: .35rem .6rem;
+      border-radius: 8px;
+      background: rgba(255, 251, 238, .7);
+    }
+
+    .pill {
+      font-size: .75rem;
+      font-weight: 700;
+      padding: .05rem .5rem;
+      border-radius: 999px;
+    }
+
+    .pill.ok {
+      background: #dcebc8;
+      color: #2e4a1e;
+    }
+
+    .pill.skip {
+      background: #efe3c4;
+      color: #6a5220;
+    }
+
+    .pill.fail {
+      background: #f6d6cc;
+      color: #86311f;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 공용 그림 모음 (도토리, 칭찬도장, 먼지 요정, 나뭇잎) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="g-nut" cx="38%" cy="35%" r="70%">
+        <stop offset="0" stop-color="#f0b56a" />
+        <stop offset=".55" stop-color="#c47a35" />
+        <stop offset="1" stop-color="#8a4c1c" />
+      </radialGradient>
+      <linearGradient id="g-cap" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#9b7447" />
+        <stop offset="1" stop-color="#5e4024" />
+      </linearGradient>
+      <pattern id="p-cap" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <rect width="6" height="6" fill="url(#g-cap)" />
+        <path d="M0 0H6M0 0V6" stroke="#4a3019" stroke-width="1.1" opacity=".55" />
+      </pattern>
+      <radialGradient id="g-nut-raw" cx="38%" cy="35%" r="75%">
+        <stop offset="0" stop-color="#f6f0d4" />
+        <stop offset=".6" stop-color="#dcd3a6" />
+        <stop offset="1" stop-color="#bdb384" />
+      </radialGradient>
+      <radialGradient id="g-nut-wrong" cx="38%" cy="35%" r="75%">
+        <stop offset="0" stop-color="#f3b39c" />
+        <stop offset=".6" stop-color="#d4735a" />
+        <stop offset="1" stop-color="#a84a35" />
+      </radialGradient>
+      <pattern id="p-cap-raw" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <rect width="5" height="5" fill="#cbbf98" />
+        <path d="M0 0H5M0 0V5" stroke="#9e9068" stroke-width="1" opacity=".6" />
+      </pattern>
+      <radialGradient id="g-stamp" cx="40%" cy="35%" r="70%">
+        <stop offset="0" stop-color="#e47763" />
+        <stop offset="1" stop-color="#b8412e" />
+      </radialGradient>
+      <symbol id="i-acorn" viewBox="0 0 64 64">
+        <ellipse cx="32" cy="60" rx="15" ry="3" fill="#3b2f22" opacity=".18" />
+        <path d="M14 29 Q13 52 32 59 Q51 52 50 29 Z" fill="url(#g-nut)" stroke="#6e3c15" stroke-width="1.5" />
+        <ellipse cx="22.5" cy="39" rx="3.5" ry="8" fill="#fff" opacity=".45" transform="rotate(12 22.5 39)" />
+        <circle cx="26" cy="43" r="1.9" fill="#3b2410" />
+        <circle cx="38" cy="43" r="1.9" fill="#3b2410" />
+        <path d="M29.5 47 Q32 49.5 34.5 47" stroke="#3b2410" stroke-width="1.4" fill="none" stroke-linecap="round" />
+        <ellipse cx="22.5" cy="47" rx="3" ry="1.8" fill="#f28c7a" opacity=".6" />
+        <ellipse cx="41.5" cy="47" rx="3" ry="1.8" fill="#f28c7a" opacity=".6" />
+        <path d="M9 31 Q8 15 32 13 Q56 15 55 31 Q32 37 9 31 Z" fill="url(#p-cap)" stroke="#4a3019" stroke-width="1.6" />
+        <path d="M14 22 Q32 15 50 22" stroke="#c9a577" stroke-width="1.6" fill="none" opacity=".6"
+          stroke-linecap="round" />
+        <path d="M31 14 Q29 7 35 3" stroke="#4a3019" stroke-width="3.2" fill="none" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-stamp" viewBox="0 0 64 64">
+        <g fill="#f4b8b0" stroke="#d98579" stroke-width="1">
+          <ellipse cx="32" cy="9" rx="7" ry="9" />
+          <ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(45 32 32)" />
+          <ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(90 32 32)" />
+          <ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(135 32 32)" />
+          <ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(180 32 32)" />
+          <ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(225 32 32)" />
+          <ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(270 32 32)" />
+          <ellipse cx="32" cy="9" rx="7" ry="9" transform="rotate(315 32 32)" />
+        </g>
+        <path d="M12 52 Q4 44 8 36 Q16 42 12 52Z" fill="#6f9a44" stroke="#3c5a2c" stroke-width="1" />
+        <path d="M52 52 Q60 44 56 36 Q48 42 52 52Z" fill="#6f9a44" stroke="#3c5a2c" stroke-width="1" />
+        <circle cx="32" cy="32" r="18" fill="url(#g-stamp)" />
+        <circle cx="32" cy="32" r="15" fill="none" stroke="#fde9d6" stroke-width="1.5" stroke-dasharray="2 2.2" />
+        <path d="M25 29 Q27 26 29 29" stroke="#fff4e4" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M35 29 Q37 26 39 29" stroke="#fff4e4" stroke-width="2" fill="none" stroke-linecap="round" />
+        <path d="M25 35 Q32 42 39 35" stroke="#fff4e4" stroke-width="2.2" fill="none" stroke-linecap="round" />
+      </symbol>
+      <symbol id="i-soot" viewBox="0 0 40 40">
+        <circle cx="20" cy="22" r="13" fill="#231f1c" stroke="#231f1c" stroke-width="7" stroke-dasharray="1.2 2.1"
+          stroke-linecap="round" />
+        <circle cx="15" cy="20" r="4.4" fill="#fff" />
+        <circle cx="25" cy="20" r="4.4" fill="#fff" />
+        <circle cx="15.6" cy="20.6" r="2" fill="#111" />
+        <circle cx="25.6" cy="20.6" r="2" fill="#111" />
+      </symbol>
+      <symbol id="i-leaf" viewBox="0 0 20 12">
+        <path d="M0 6 Q8 -3 20 6 Q8 15 0 6Z" />
+        <path d="M1 6 H17" stroke="#e4efc4" stroke-width=".8" opacity=".6" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <svg class="hills" viewBox="0 0 1200 180" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 110 Q150 60 300 95 T620 80 T900 90 T1200 70 V180 H0Z" fill="#9dbb85" opacity=".35" />
+    <path d="M0 140 Q200 100 380 128 T760 120 T1200 112 V180 H0Z" fill="#6f9a5a" opacity=".32" />
+    <path d="M0 165 Q260 140 520 160 T1200 150 V180 H0Z" fill="#4f7a45" opacity=".3" />
+  </svg>
+
+  <div class="wrap">
+
+    <!-- ================= 화면 1: 마법학교 입구 ================= -->
+    <section id="screen-login" aria-labelledby="login-title">
+      <svg class="gate" id="gate" viewBox="0 0 800 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="g-stone" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#a59a86" />
+            <stop offset=".5" stop-color="#cfc5ae" />
+            <stop offset="1" stop-color="#998e79" />
+          </linearGradient>
+          <radialGradient id="g-glow" cx="50%" cy="55%" r="50%">
+            <stop offset="0" stop-color="#fff6d6" stop-opacity=".95" />
+            <stop offset="1" stop-color="#fff6d6" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+        <ellipse cx="400" cy="300" rx="330" ry="260" fill="url(#g-glow)" />
+        <!-- 철문 -->
+        <g stroke="#4a4136" stroke-width="5" opacity=".55">
+          <path d="M180 520 V230 Q400 40 620 230 V520" fill="none" />
+          <line x1="240" y1="520" x2="240" y2="170" />
+          <line x1="300" y1="520" x2="300" y2="128" />
+          <line x1="360" y1="520" x2="360" y2="108" />
+          <line x1="440" y1="520" x2="440" y2="108" />
+          <line x1="500" y1="520" x2="500" y2="128" />
+          <line x1="560" y1="520" x2="560" y2="170" />
+          <line x1="180" y1="330" x2="620" y2="330" />
+        </g>
+        <!-- 돌기둥 & 아치 -->
+        <path d="M120 540 V220 Q400 -20 680 220 V540" fill="none" stroke="url(#g-stone)" stroke-width="54" />
+        <path d="M120 540 V220 Q400 -20 680 220 V540" fill="none" stroke="#6f6553" stroke-width="54"
+          stroke-dasharray="3 38" opacity=".45" />
+        <rect x="70" y="200" width="100" height="26" rx="4" fill="#b7ad97" />
+        <rect x="630" y="200" width="100" height="26" rx="4" fill="#b7ad97" />
+        <g id="vines"></g>
+        <path d="M0 540 Q200 515 400 530 T800 525 V560 H0Z" fill="#6f9a5a" />
+      </svg>
+
+      <div class="tome login-book">
+        <span class="corner tr"></span><span class="corner br"></span>
+        <a href="index.html#plane" class="home-link">← 평면도형 갈림길로</a>
+        <p class="eyebrow">숲속 마법학교 · 1학년 수학 원정</p>
+        <h1 id="login-title" class="login-title">마법 원정대<br>원과 부채꼴</h1>
+        <p class="lead" style="margin:.4rem 0 1.1rem">교문을 지나려면 출석부에 학번을 적어 줘. 학년 1자리, 반 2자리, 번호 2자리야.</p>
+        <form id="login-form" novalidate>
+          <label for="sid" class="story" style="font-weight:700;display:block;margin-bottom:.3rem">학번</label>
+          <input id="sid" class="sid-input tabnum" inputmode="numeric" autocomplete="off" maxlength="5"
+            placeholder="10101" aria-describedby="sid-parse">
+          <p id="sid-parse" class="sid-parse" aria-live="polite" style="margin:.35rem 0 .9rem"></p>
+          <button type="submit" class="plank moss" style="width:100%;font-size:1.15rem">시작하기</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ================= 본 화면 ================= -->
+    <div id="screen-app" hidden>
+      <header class="signboard" style="margin-bottom:18px">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <a href="index.html#plane" class="home-link light">← 평면도형 갈림길로</a>
+            <h1>숲속 마법학교 · 원과 부채꼴</h1>
+            <p id="who" style="margin:0;font-size:.9rem;opacity:.9"></p>
+          </div>
+          <div class="pouch" aria-label="보상 주머니">
+            <span class="pouch-item" id="pouch-acorn" title="도토리"><svg aria-hidden="true">
+                <use href="#i-acorn" />
+              </svg><span id="acorn-count" class="tabnum">0</span><span class="sr-only">개 도토리</span></span>
+            <span class="pouch-item" id="pouch-stamp" title="칭찬도장"><svg aria-hidden="true">
+                <use href="#i-stamp" />
+              </svg><span id="stamp-count" class="tabnum">0</span><span class="sr-only">개 칭찬도장</span></span>
+          </div>
+        </div>
+        <nav class="tabbar" role="tablist" style="margin-top:.7rem">
+          <button class="tab" role="tab" id="t-library" aria-controls="tab-library" aria-selected="true">마법 도서관</button>
+          <button class="tab" role="tab" id="t-forest" aria-controls="tab-forest" aria-selected="false">챌린지 숲</button>
+          <button class="tab" role="tab" id="t-mailbox" aria-controls="tab-mailbox" aria-selected="false">마법
+            우편함</button>
+          <button class="tab" id="logout" style="margin-left:auto">교문으로 나가기</button>
+        </nav>
+      </header>
+
+      <!-- ========== 화면 2: 마법 도서관 ========== -->
+      <section id="tab-library" role="tabpanel" aria-labelledby="t-library" class="grid gap-5">
+        <div>
+          <h2 class="section-title">마법 도서관 · 꼭 알아야 할 주문 9가지</h2>
+          <p class="lead" style="margin:.3rem 0 0">원과 부채꼴 단원에서 쓰는 말들이야. 그림에서 노랗게 빛나는 부분이 그 용어가 가리키는 곳이야.</p>
+        </div>
+        <div class="term-grid" id="term-grid"></div>
+
+        <div class="tome" style="margin-top:6px">
+          <span class="corner tr"></span><span class="corner br"></span>
+          <div class="sim">
+            <div class="grid gap-3" style="min-width:0">
+              <div>
+                <h2 class="section-title" style="font-size:1.35rem">공식 실험실</h2>
+                <p class="lead" style="margin:.2rem 0 0;font-size:.93rem">나뭇잎을 움직여서 반지름과 중심각을 바꿔 봐. 부채꼴 모양과 공식의 값이 함께
+                  바뀌어.</p>
+              </div>
+              <svg id="sim-svg" class="sim-canvas" viewBox="0 0 320 320" role="img"
+                aria-label="반지름과 중심각에 따라 바뀌는 원과 부채꼴 그림"></svg>
+              <div class="slider-row">
+                <label for="r-range"><span>반지름 r</span><output id="r-out" class="tabnum">6 cm</output></label>
+                <input id="r-range" class="leaf" type="range" min="1" max="10" step="1" value="6">
+              </div>
+              <div class="slider-row">
+                <label for="x-range"><span>중심각 x°</span><output id="x-out" class="tabnum">120°</output></label>
+                <input id="x-range" class="leaf" type="range" min="0" max="360" step="5" value="120">
+                <div class="chip-row" id="x-chips" aria-label="자주 나오는 중심각"></div>
+              </div>
+            </div>
+            <div class="grid gap-2 content-start" id="formulas" aria-live="polite" style="min-width:0"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 화면 3: 챌린지 숲 ========== -->
+      <section id="tab-forest" role="tabpanel" aria-labelledby="t-forest" hidden class="grid gap-4">
+        <div class="flex flex-wrap items-end justify-between gap-2">
+          <div>
+            <h2 class="section-title">챌린지 숲 · 20개의 징검다리</h2>
+            <p class="lead" style="margin:.2rem 0 0">문제를 맞힐 때마다 도토리 1개! 도토리 5개를 모으면 칭찬도장 1개로 바꿔 줄게.</p>
+          </div>
+          <p class="tabnum story" id="progress-text" style="margin:0;font-weight:700;color:var(--bark-deep)"></p>
+        </div>
+        <div class="parchment reward-board" id="reward-board" aria-live="polite">
+          <div>
+            <h3 class="story">도토리 주머니</h3>
+            <p id="rb-acorn-text"></p>
+            <div class="acorn-slots" id="acorn-slots"></div>
+          </div>
+          <div>
+            <h3 class="story">칭찬 도장 <span class="cnt tabnum" id="rb-stamp-count"></span></h3>
+            <p>도토리 5개마다 칭찬 도장 1개가 찍혀요.</p>
+            <div class="stamp-slots" id="stamp-slots"></div>
+          </div>
+        </div>
+        <div class="trail" id="trail"></div>
+
+        <div class="forest-grid">
+          <article class="tome qcard" aria-live="polite">
+            <span class="corner tr"></span><span class="corner br"></span>
+            <div class="qmeta"><span class="badge" id="q-part"></span><span class="qnum tabnum" id="q-num"></span></div>
+            <p class="qtext" id="q-text"></p>
+            <div id="q-fig"></div>
+            <div id="q-answer"></div>
+            <div id="q-feedback"></div>
+            <div class="flex flex-wrap gap-2 justify-between" style="margin-top:1rem">
+              <button class="plank small ghost" id="prev-btn">이전 문제</button>
+              <button class="plank small" id="next-btn">다음 문제</button>
+            </div>
+          </article>
+
+          <aside class="parchment companion" aria-label="원정대 친구들">
+            <div class="bubble" id="bubble">안녕! 나는 견습 마법사 하루야. 같이 숲을 건너 보자!</div>
+            <svg class="wizard" id="wizard" viewBox="0 0 140 170" aria-hidden="true">
+              <g class="w-body">
+                <path d="M38 168 Q42 108 70 98 Q98 108 102 168 Z" fill="#3f6272" stroke="#26404c" stroke-width="2" />
+                <path d="M70 100 L70 168" stroke="#26404c" stroke-width="1.5" opacity=".5" />
+                <path d="M52 104 Q70 114 88 104 L87 112 Q70 122 53 112Z" fill="#c2553f" />
+                <path d="M84 110 L80 138" stroke="#c2553f" stroke-width="7" stroke-linecap="round" />
+                <circle cx="97" cy="128" r="6" fill="#f6d7b8" />
+                <path d="M98 126 L126 92" stroke="#6b4423" stroke-width="4" stroke-linecap="round" />
+                <path d="M128 80 l3 7 7 1 -5 5 1 7 -6 -3 -6 3 1 -7 -5 -5 7 -1z" fill="#e8b64a" stroke="#b5842a"
+                  stroke-width="1" />
+              </g>
+              <g class="w-head">
+                <circle cx="70" cy="74" r="28" fill="#5a3a22" />
+                <circle cx="70" cy="78" r="22" fill="#f6d7b8" />
+                <path d="M47 72 Q56 56 70 64 Q84 56 93 72 Q88 55 70 54 Q52 55 47 72Z" fill="#5a3a22" />
+                <ellipse cx="62" cy="80" rx="2.7" ry="3.5" fill="#2b2016" />
+                <ellipse cx="78" cy="80" rx="2.7" ry="3.5" fill="#2b2016" />
+                <circle cx="63" cy="78.8" r="1" fill="#fff" />
+                <circle cx="79" cy="78.8" r="1" fill="#fff" />
+                <ellipse cx="56" cy="87" rx="4" ry="2.4" fill="#f0a3a0" opacity=".75" />
+                <ellipse cx="84" cy="87" rx="4" ry="2.4" fill="#f0a3a0" opacity=".75" />
+                <path d="M66 89 Q70 93 74 89" stroke="#2b2016" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                <ellipse cx="70" cy="57" rx="38" ry="9" fill="#2f4a2a" />
+                <path d="M46 56 Q58 34 62 12 Q70 -2 86 6 Q76 12 78 30 Q86 46 94 56Z" fill="#3e6134" stroke="#253d20"
+                  stroke-width="1.5" />
+                <path d="M48 52 Q70 44 92 52" stroke="#e8b64a" stroke-width="4" fill="none" />
+                <circle cx="72" cy="30" r="3" fill="#f7e3a1" />
+              </g>
+            </svg>
+            <div class="sprites" id="sprites" aria-hidden="true">
+              <svg class="sprite">
+                <use href="#i-soot" />
+              </svg><svg class="sprite">
+                <use href="#i-soot" />
+              </svg><svg class="sprite">
+                <use href="#i-soot" />
+              </svg>
+            </div>
+            <p class="t-small" style="margin:0;font-size:.82rem;color:var(--ink-soft);text-align:center">먼지 요정들이 네 도토리를
+              지켜 줄 거야</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ========== 화면 4: 마법 우편함 (데이터 연동) ========== -->
+      <section id="tab-mailbox" role="tabpanel" aria-labelledby="t-mailbox" hidden class="grid gap-4">
+        <div>
+          <h2 class="section-title">마법 우편함 · 선생님께 보내는 학습 기록</h2>
+          <p class="lead" style="margin:.2rem 0 0">접속할 때, 문제를 풀 때, 20문제를 모두 풀었을 때 기록이 자동으로 선생님 구글 시트에 전달돼.</p>
+        </div>
+        <div class="stat-row">
+          <div class="stat">
+            <div class="k">푼 문제</div>
+            <div class="v tabnum" id="st-solved">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">맞힌 문제</div>
+            <div class="v tabnum" id="st-correct">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">도토리 (주머니 속)</div>
+            <div class="v tabnum" id="st-acorn">0</div>
+          </div>
+          <div class="stat">
+            <div class="k">칭찬도장</div>
+            <div class="v tabnum" id="st-stamp">0</div>
+          </div>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2">
+          <div class="parchment" style="padding:14px;min-width:0">
+            <div class="flex flex-wrap items-center justify-between gap-2" style="margin-bottom:.5rem">
+              <h3 class="story" style="margin:0;font-size:1.1rem;color:var(--forest)">마지막으로 보낸 편지</h3>
+              <button class="plank small moss" id="send-now">지금 기록 보내기</button>
+            </div>
+            <div class="code" id="last-payload">아직 보낸 편지가 없어.</div>
+          </div>
+          <div class="parchment" style="padding:14px;min-width:0">
+            <h3 class="story" style="margin:0 0 .5rem;font-size:1.1rem;color:var(--forest)">배달 기록</h3>
+            <ul class="log" id="send-log">
+              <li>배달 기록이 여기에 쌓여.</li>
+            </ul>
+            <p id="url-note" style="margin:.7rem 0 0;font-size:.85rem;color:var(--ink-soft)"></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- 교환 팝업 -->
+  <div class="modal" id="exchange" hidden role="dialog" aria-modal="true" aria-labelledby="ex-title">
+    <div class="tome modal-card">
+      <span class="corner tr"></span><span class="corner br"></span>
+      <div class="ex-stage" id="ex-stage">
+        <svg class="ex-stamp" aria-hidden="true">
+          <use href="#i-stamp" />
+        </svg>
+        <span class="pang" style="left:4%;top:8%">팡!</span><span class="pang" style="right:4%;top:18%">팡!</span>
+      </div>
+      <h3 id="ex-title" class="story" style="margin:0;font-size:1.3rem;color:var(--forest)">도토리 5개가 칭찬도장 1개로 교환되었어!</h3>
+      <p style="margin:.4rem 0 1rem;color:var(--ink-soft)">먼지 요정들이 도토리를 모아서 도장으로 바꿔 줬어.</p>
+      <button class="plank moss" id="ex-close">고마워!</button>
+    </div>
+  </div>
+
+  <!-- 완주 팝업 -->
+  <div class="modal" id="finish" hidden role="dialog" aria-modal="true" aria-labelledby="fin-title">
+    <div class="tome modal-card">
+      <span class="corner tr"></span><span class="corner br"></span>
+      <svg style="width:90px;height:90px;margin:0 auto .4rem;display:block" aria-hidden="true">
+        <use href="#i-stamp" />
+      </svg>
+      <h3 id="fin-title" class="story" style="margin:0;font-size:1.35rem;color:var(--forest)">원정 완주!</h3>
+      <p id="fin-text" style="margin:.5rem 0 1rem"></p>
+      <button class="plank moss" id="fin-close">숲 둘러보기</button>
+    </div>
+  </div>
+
+  <script>
+    /* ============================================================
+       구글 시트 연동 주소 — Apps Script 웹 앱 배포 URL을 넣어 주세요.
+       예: 'https://script.google.com/macros/s/XXXXXXXX/exec'
+       비워 두면 전송을 건너뛰고 우편함에만 기록합니다.
+       ============================================================ */
+    const GOOGLE_SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbwvytf2nwElHO5q3JU7sL222QmJGinNJGIZBeAogksn6yLwiVRrCJgYKhM6Y2lrqMyp/exec';
+
+    /* ---------------- 문제 데이터 ---------------- */
+    const PARTS = ['용어의 숲', '원의 연못', '부채꼴 언덕', '둘레의 오솔길'];
+    const QUESTIONS = [
+      {
+        part: 0, type: 'mc', q: '원의 둘레를 지름으로 나눈 값은 원의 크기와 상관없이 항상 똑같아. 이 값의 이름은 뭘까?',
+        options: ['반지름', '중심각', '원주율 (π)', '부채꼴'], answer: 2, fig: { k: 'pi' },
+        hint: '약 3.14이고 "파이"라고 읽는 값이야. (원의 둘레) ÷ (지름)의 이름을 떠올려 봐.',
+        explain: '원주율 π = (원의 둘레) ÷ (지름) ≈ 3.14'
+      },
+      {
+        part: 0, type: 'mc', q: '그림에서 원 위의 두 점 A, B를 곧게 이은 노란 선분을 뭐라고 부를까?',
+        options: ['호', '현', '반지름', '중심각'], answer: 1, fig: { k: 'chord' },
+        hint: '원 위의 두 점 사이의 "곡선"은 호, "곧은 선분"은 ○이야!',
+        explain: '원 위의 두 점을 이은 선분은 현이야. 호는 원의 일부인 곡선이고.'
+      },
+      {
+        part: 0, type: 'mc', q: '호와 현으로 둘러싸인 도형(노랗게 칠한 부분)의 이름은?',
+        options: ['부채꼴', '반원', '활꼴', '중심각'], answer: 2, fig: { k: 'segment' },
+        hint: '활처럼 생긴 모양이야. 부채꼴은 반지름 2개와 호로 둘러싸여 있지.',
+        explain: '호와 현으로 둘러싸인 도형은 활꼴이야.'
+      },
+      {
+        part: 0, type: 'mc', q: '한 원에서 중심각의 크기가 30°에서 60°로 2배가 되었어. 호의 길이는 어떻게 될까?',
+        options: ['그대로야', '2배가 돼', '4배가 돼', '절반이 돼'], answer: 1, fig: { k: 'twin' },
+        hint: '한 원에서 부채꼴의 호의 길이는 중심각의 크기에 정비례해.',
+        explain: '호의 길이는 중심각의 크기에 정비례하니까 중심각이 2배면 호의 길이도 2배야.'
+      },
+      {
+        part: 0, type: 'mc', q: '한 원에 대한 설명으로 옳지 않은 것을 골라 봐.',
+        options: ['크기가 같은 중심각에 대한 호의 길이는 같다.', '크기가 같은 중심각에 대한 현의 길이는 같다.', '부채꼴의 넓이는 중심각의 크기에 정비례한다.', '현의 길이는 중심각의 크기에 정비례한다.'], answer: 3, fig: null,
+        hint: '호와 넓이는 중심각에 정비례해. 그런데 현은? 중심각이 2배일 때 현도 정확히 2배가 되는지 그려 봐.',
+        explain: '현의 길이는 중심각의 크기에 정비례하지 않아. 중심각이 2배가 되어도 현은 2배보다 짧아.'
+      },
+
+      {
+        part: 1, type: 'short', q: '반지름이 5 cm인 원 모양 마법진이 있어. 이 마법진의 둘레는 몇 cm일까? (π를 써서 답해 줘)',
+        unit: 'cm', answers: ['10π'], fig: { k: 'circle', r: 5, label: '5 cm' },
+        hint: '원의 둘레 l = 2πr 에 r = 5를 넣어 봐!', explain: 'l = 2π × 5 = 10π (cm)'
+      },
+      {
+        part: 1, type: 'short', q: '반지름이 4 cm인 원의 넓이는 몇 cm²일까?',
+        unit: 'cm²', answers: ['16π'], fig: { k: 'circle', r: 4, label: '4 cm' },
+        hint: '원의 넓이 S = πr². r² 은 r × r 이야.', explain: 'S = π × 4² = 16π (cm²)'
+      },
+      {
+        part: 1, type: 'short', q: '지름이 12 cm인 원 모양 쟁반이 있어. 쟁반의 둘레는 몇 cm일까?',
+        unit: 'cm', answers: ['12π'], fig: { k: 'circle', r: 6, label: '12 cm', d: true },
+        hint: '지름이 12 cm면 반지름은 6 cm! l = 2π × 6', explain: 'l = 2π × 6 = 12π (cm)'
+      },
+      {
+        part: 1, type: 'short', q: '지름이 10 m인 동그란 연못이 있어. 연못의 넓이는 몇 m²일까?',
+        unit: 'm²', answers: ['25π'], fig: { k: 'circle', r: 5, label: '10 m', d: true },
+        hint: '넓이는 반지름으로 구해! 반지름 = 10 ÷ 2 = 5 m', explain: 'S = π × 5² = 25π (m²)'
+      },
+      {
+        part: 1, type: 'short', q: '둘레가 14π cm인 원이 있어. 이 원의 반지름은 몇 cm일까?',
+        unit: 'cm', answers: ['7'], fig: { k: 'circle', r: 7, label: '? cm' },
+        hint: '2πr = 14π 라는 식을 세워 봐. 양쪽을 2π로 나누면?', explain: '2πr = 14π 이므로 r = 7 (cm)'
+      },
+
+      {
+        part: 2, type: 'short', q: '반지름이 6 cm, 중심각이 60°인 부채꼴의 호의 길이는 몇 cm일까?',
+        unit: 'cm', answers: ['2π'], fig: { k: 'sector', r: 6, x: 60, rl: '6 cm', xl: '60°', al: '?' },
+        hint: '호의 길이 l = 2πr × x/360. 60/360은 1/6이야!', explain: 'l = 2π × 6 × 60/360 = 2π (cm)'
+      },
+      {
+        part: 2, type: 'short', q: '반지름이 6 cm, 중심각이 120°인 부채꼴의 넓이는 몇 cm²일까?',
+        unit: 'cm²', answers: ['12π'], fig: { k: 'sector', r: 6, x: 120, rl: '6 cm', xl: '120°', fill: true },
+        hint: '부채꼴의 넓이 S = πr² × x/360. 120/360은 1/3이야.', explain: 'S = π × 36 × 120/360 = 12π (cm²)'
+      },
+      {
+        part: 2, type: 'short', q: '반지름이 8 cm, 중심각이 45°인 부채꼴의 호의 길이는 몇 cm일까?',
+        unit: 'cm', answers: ['2π'], fig: { k: 'sector', r: 8, x: 45, rl: '8 cm', xl: '45°', al: '?' },
+        hint: '45/360 = 1/8 이야. 원의 둘레 2π × 8의 1/8을 구해 봐.', explain: 'l = 2π × 8 × 45/360 = 2π (cm)'
+      },
+      {
+        part: 2, type: 'short', q: '반지름이 10 cm이고 호의 길이가 4π cm인 부채꼴의 넓이는 몇 cm²일까?',
+        unit: 'cm²', answers: ['20π'], fig: { k: 'sector', r: 10, x: 72, rl: '10 cm', al: '4π cm', fill: true },
+        hint: '중심각을 몰라도 괜찮아! S = ½ × r × l 을 써 봐.', explain: 'S = ½ × 10 × 4π = 20π (cm²)'
+      },
+      {
+        part: 2, type: 'short', q: '반지름이 9 cm이고 호의 길이가 6π cm인 부채꼴이 있어. 중심각의 크기는 몇 도일까?',
+        unit: '°', answers: ['120'], fig: { k: 'sector', r: 9, x: 120, rl: '9 cm', xl: 'x°', al: '6π cm' },
+        hint: '원 전체 둘레는 2π × 9 = 18π야. 6π는 18π의 몇 분의 1일까?', explain: '6π ÷ 18π = 1/3 이므로 x = 360 × 1/3 = 120°'
+      },
+
+      {
+        part: 3, type: 'short', q: '반지름이 6 cm, 중심각이 90°인 부채꼴의 둘레는 몇 cm일까? (반지름도 잊지 마!)',
+        unit: 'cm', answers: ['12+3π'], fig: { k: 'sector', r: 6, x: 90, rl: '6 cm', xl: '90°', peri: true },
+        hint: '부채꼴의 둘레 = 반지름 2개 + 호의 길이. 2 × 6 + 2π × 6 × 90/360', explain: '둘레 = 2 × 6 + 3π = 12 + 3π (cm)'
+      },
+      {
+        part: 3, type: 'short', q: '반지름이 4 cm인 반원의 둘레는 몇 cm일까?',
+        unit: 'cm', answers: ['8+4π'], fig: { k: 'sector', r: 4, x: 180, rl: '4 cm', peri: true },
+        hint: '반원은 중심각이 180°인 부채꼴이야. 아래쪽 지름(= 2r)을 빼먹지 마!', explain: '둘레 = 2 × 4 + 2π × 4 × 1/2 = 8 + 4π (cm)'
+      },
+      {
+        part: 3, type: 'short', q: '반지름이 5 cm이고 호의 길이가 2π cm인 부채꼴의 둘레는 몇 cm일까?',
+        unit: 'cm', answers: ['10+2π'], fig: { k: 'sector', r: 5, x: 72, rl: '5 cm', al: '2π cm', peri: true },
+        hint: '호의 길이는 이미 알려 줬어! 반지름 2개만 더하면 돼. 2r + l', explain: '둘레 = 2 × 5 + 2π = 10 + 2π (cm)'
+      },
+      {
+        part: 3, type: 'mc', q: '반지름이 12 cm인 피자를 똑같이 8조각으로 나눴어. 피자 한 조각(부채꼴)의 넓이는?',
+        options: ['9π cm²', '18π cm²', '24π cm²', '36π cm²'], answer: 1, fig: { k: 'pizza' },
+        hint: '8조각이면 한 조각의 중심각은 360° ÷ 8 = 45°야. 전체 넓이 π × 12²의 1/8!', explain: 'S = π × 144 × 45/360 = 18π (cm²)'
+      },
+      {
+        part: 3, type: 'short', q: '마법 정원의 스프링클러가 반지름 10 m, 중심각 72°의 부채꼴 모양으로 물을 뿌려. 물이 닿는 땅의 넓이는 몇 m²일까?',
+        unit: 'm²', answers: ['20π'], fig: { k: 'sector', r: 10, x: 72, rl: '10 m', xl: '72°', fill: true },
+        hint: '72/360 = 1/5 이야. 원 전체 넓이 π × 10²의 1/5을 구해 봐.', explain: 'S = π × 100 × 72/360 = 20π (m²)'
+      }
+    ];
+    QUESTIONS.forEach((q, i) => q.id = i + 1);
+
+    /* ---------------- 상태 ---------------- */
+    const blank = () => ({ studentId: '', acorns: 0, stamps: 0, totalAcorns: 0, answers: {}, current: 0, finished: false });
+    let state = blank();
+    let sendLog = [];
+    const storeKey = id => 'magic-circle-quest-' + id;
+    function save() { try { localStorage.setItem(storeKey(state.studentId), JSON.stringify(state)); } catch (e) { } }
+    function load(id) {
+      try { const raw = localStorage.getItem(storeKey(id)); if (raw) return Object.assign(blank(), JSON.parse(raw)); } catch (e) { }
+      return Object.assign(blank(), { studentId: id });
+    }
+    const solvedCount = () => Object.values(state.answers).filter(a => a.status).length;
+    const correctCount = () => Object.values(state.answers).filter(a => a.status === 'correct').length;
+
+    const $ = id => document.getElementById(id);
+    const pad = n => String(n).padStart(2, '0');
+    function nowStamp() { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`; }
+
+    /* ---------------- 기하 도우미 ---------------- */
+    const rad = d => d * Math.PI / 180;
+    const P = (cx, cy, R, deg) => [cx + R * Math.cos(rad(deg)), cy - R * Math.sin(rad(deg))];
+    const f1 = n => Math.round(n * 100) / 100;
+    function arcD(cx, cy, R, a0, a1) {
+      const [x0, y0] = P(cx, cy, R, a0), [x1, y1] = P(cx, cy, R, a1);
+      return `M${f1(x0)} ${f1(y0)} A${R} ${R} 0 ${a1 - a0 > 180 ? 1 : 0} 0 ${f1(x1)} ${f1(y1)}`;
+    }
+    function sectorD(cx, cy, R, a0, a1) {
+      if (a1 - a0 >= 360) return `M${cx - R} ${cy} a${R} ${R} 0 1 0 ${2 * R} 0 a${R} ${R} 0 1 0 ${-2 * R} 0Z`;
+      return `M${cx} ${cy} L${arcD(cx, cy, R, a0, a1).slice(1)} Z`;
+    }
+    function segD(cx, cy, R, a0, a1) { return arcD(cx, cy, R, a0, a1) + ' Z'; }
+    const txt = (x, y, s, cls = 't-lab', anchor = 'middle') => `<text x="${f1(x)}" y="${f1(y)}" class="${cls}" text-anchor="${anchor}" dominant-baseline="middle">${s}</text>`;
+
+    /* ---------------- 용어 카드 ---------------- */
+    const TERMS = [
+      { k: 'circle', name: '원', en: 'circle', d: '평면 위의 한 점 O에서 똑같은 거리에 있는 점들을 모두 모으면 생기는 도형이야. 점 O를 원의 중심이라고 해.' },
+      { k: 'radius', name: '반지름', en: 'r', d: '원의 중심과 원 위의 한 점을 이은 선분이야. 한 원에서 반지름은 어디서 재도 길이가 같아.' },
+      { k: 'diameter', name: '지름', en: '2r', d: '원의 중심을 지나는 현이야. 지름 = 반지름 × 2 이고, 원에서 가장 긴 현이지.' },
+      { k: 'pi', name: '원주율', en: 'π', d: '(원의 둘레) ÷ (지름)의 값. 원이 크든 작든 항상 3.14159…로 같아서 π(파이)라는 기호로 써.' },
+      { k: 'angle', name: '중심각', en: 'x°', d: '부채꼴에서 두 반지름이 만드는 각이야. 호 AB에 대한 중심각은 ∠AOB라고 써.' },
+      { k: 'arc', name: '호', en: 'arc', d: '원 위의 두 점 A, B 사이에 있는 원의 일부분(곡선)이야. 기호로 <span class="arcsym">AB</span>라고 써.' },
+      { k: 'chord', name: '현', en: 'chord', d: '원 위의 두 점을 곧게 이은 선분이야. 현 AB는 기호로 AB라고 써.' },
+      { k: 'sector', name: '부채꼴', en: 'sector', d: '두 반지름과 호로 둘러싸인 도형이야. 펼친 부채 모양을 떠올려 봐!' },
+      { k: 'segment', name: '활꼴', en: 'segment', d: '현과 호로 둘러싸인 도형이야. 반원은 부채꼴이면서 동시에 활꼴이야.' }
+    ];
+    function termFig(k) {
+      const cx = 60, cy = 50, R = 36, A = 40, B = 140;
+      const [ax, ay] = P(cx, cy, R, A), [bx, by] = P(cx, cy, R, B);
+      const base = `<circle cx="${cx}" cy="${cy}" r="${R}" class="s-base"/>`;
+      const O = `<circle cx="${cx}" cy="${cy}" r="2.6" class="f-dot"/>`;
+      const labAB = txt(...P(cx, cy, R + 9, A), 'A') + txt(...P(cx, cy, R + 9, B), 'B');
+      const dotsAB = `<circle cx="${ax}" cy="${ay}" r="2.6" class="f-dot"/><circle cx="${bx}" cy="${by}" r="2.6" class="f-dot"/>`;
+      let s = '';
+      switch (k) {
+        case 'circle': s = `<circle cx="${cx}" cy="${cy}" r="${R}" class="s-hl"/>${O}${txt(cx + 8, cy + 8, 'O')}`; break;
+        case 'radius': { const [x, y] = P(cx, cy, R, 25); s = base + `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" class="s-hl"/>` + O + txt(cx + 18, cy - 14, 'r'); break; }
+        case 'diameter': s = base + `<line x1="${cx - R}" y1="${cy}" x2="${cx + R}" y2="${cy}" class="s-hl"/>` + O + txt(cx, cy - 9, '2r'); break;
+        case 'pi': s = `<circle cx="${cx}" cy="${cy}" r="${R}" class="s-hl"/><line x1="${cx - R}" y1="${cy}" x2="${cx + R}" y2="${cy}" class="s-dash"/>` + O + txt(cx, cy - 10, 'π', 't-lab') + txt(cx, cy + 12, '둘레÷지름', 't-small'); break;
+        case 'angle': s = base + `<path d="${sectorD(cx, cy, R, A, B)}" fill="none" class="s-base" style="stroke:var(--ink-soft)"/><path d="${arcD(cx, cy, 11, A, B)}" class="s-hl" style="stroke-width:3"/>` + O + txt(cx, cy - 20, 'x°') + labAB; break;
+        case 'arc': s = base + `<path d="${arcD(cx, cy, R, A, B)}" class="s-hl"/>` + dotsAB + labAB; break;
+        case 'chord': s = base + `<line x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" class="s-hl"/>` + dotsAB + labAB; break;
+        case 'sector': s = base + `<path d="${sectorD(cx, cy, R, A, B)}" class="f-hl"/>` + O + labAB; break;
+        case 'segment': s = base + `<path d="${segD(cx, cy, R, A, B)}" class="f-hl"/>` + dotsAB + labAB; break;
+      }
+      return `<svg viewBox="0 0 120 100" aria-hidden="true">${s}</svg>`;
+    }
+    $('term-grid').innerHTML = TERMS.map(t => `
+  <div class="parchment term">
+    ${termFig(t.k)}
+    <div style="min-width:0"><h3>${t.name}<small>${t.en}</small></h3><p>${t.d}</p></div>
+  </div>`).join('');
+
+    /* ---------------- 공식 실험실 ---------------- */
+    const gcd = (a, b) => b ? gcd(b, a % b) : Math.abs(a);
+    function piFrac(n, d) { // n/d × π 를 기약분수로
+      if (n === 0) return '0';
+      const g = gcd(n, d); n /= g; d /= g;
+      if (d === 1) return (n === 1 ? '' : n) + 'π';
+      return `<span class="frac"><span>${n}</span><span>${d}</span></span>π`;
+    }
+    const approx = v => (Math.round(v * 100) / 100).toLocaleString('ko-KR', { maximumFractionDigits: 2 });
+    const COLORS = { circ: 'var(--c-circ)', area: 'rgba(95,145,175,.45)', arc: 'var(--c-arc)', sector: 'rgba(111,150,70,.7)', peri: 'var(--c-peri)' };
+
+    function drawSim() {
+      const r = +$('r-range').value, x = +$('x-range').value;
+      $('r-out').textContent = r + ' cm'; $('x-out').textContent = x + '°';
+      const cx = 160, cy = 160, R = 16 + r * 12.6;
+      const a0 = 0, a1 = x;
+      let s = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="var(--c-area)" stroke="var(--c-circ)" stroke-width="2" stroke-dasharray="6 5"/>`;
+      if (x > 0) {
+        s += `<path d="${sectorD(cx, cy, R, a0, a1)}" fill="var(--c-sector)" stroke="var(--c-peri)" stroke-width="2.4" stroke-linejoin="round"/>`;
+        s += x >= 360 ? `<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="var(--c-arc)" stroke-width="5"/>`
+          : `<path d="${arcD(cx, cy, R, a0, a1)}" fill="none" stroke="var(--c-arc)" stroke-width="5" stroke-linecap="round"/>`;
+        const ar = Math.min(26, R * .45);
+        if (x < 360) s += `<path d="${arcD(cx, cy, ar, a0, a1)}" fill="none" stroke="var(--ink)" stroke-width="1.5"/>`;
+        const [lx, ly] = P(cx, cy, ar + 16, x / 2);
+        s += txt(lx, ly, x + '°', 't-lab');
+        const [mx, my] = P(cx, cy, R + 16, x / 2);
+        s += txt(mx, my, '호 l', 't-lab');
+      } else {
+        s += `<line x1="${cx}" y1="${cy}" x2="${cx + R}" y2="${cy}" stroke="var(--c-peri)" stroke-width="2.4"/>`;
+      }
+      s += txt(cx + R / 2, cy + 13, 'r = ' + r, 't-lab');
+      s += `<circle cx="${cx}" cy="${cy}" r="3.2" class="f-dot"/>` + txt(cx - 10, cy + 10, 'O');
+      $('sim-svg').innerHTML = s;
+
+      const arcN = r * x, arcD_ = 180, areaN = r * r * x, areaD = 360;
+      const rows = [
+        { c: COLORS.circ, name: '원의 둘레', eq: 'l = 2πr', sub: `2π × ${r}`, res: piFrac(2 * r, 1), v: 2 * Math.PI * r, unit: 'cm' },
+        { c: COLORS.area, name: '원의 넓이', eq: 'S = πr²', sub: `π × ${r}²`, res: piFrac(r * r, 1), v: Math.PI * r * r, unit: 'cm²' },
+        { c: COLORS.arc, name: '부채꼴의 호의 길이', eq: `l = 2πr × <span class="frac"><span>x</span><span>360</span></span>`, sub: `2π × ${r} × <span class="frac"><span>${x}</span><span>360</span></span>`, res: piFrac(arcN, arcD_), v: 2 * Math.PI * r * x / 360, unit: 'cm' },
+        { c: COLORS.sector, name: '부채꼴의 넓이', eq: `S = πr² × <span class="frac"><span>x</span><span>360</span></span> = <span class="frac"><span>1</span><span>2</span></span> × r × l`, sub: `π × ${r}² × <span class="frac"><span>${x}</span><span>360</span></span> = <span class="frac"><span>1</span><span>2</span></span> × ${r} × ${piFrac(arcN, arcD_)}`, res: piFrac(areaN, areaD), v: Math.PI * r * r * x / 360, unit: 'cm²' },
+        { c: COLORS.peri, name: '부채꼴의 둘레', eq: '2r + l', sub: `2 × ${r} + ${piFrac(arcN, arcD_)}`, res: arcN === 0 ? `${2 * r}` : `${2 * r} + ${piFrac(arcN, arcD_)}`, v: 2 * r + 2 * Math.PI * r * x / 360, unit: 'cm' }
+      ];
+      $('formulas').innerHTML = rows.map(o => `
+    <div class="formula">
+      <span class="sw" style="background:${o.c}"></span>
+      <div style="min-width:0">
+        <div class="flex flex-wrap justify-between gap-x-3"><span class="name">${o.name}</span><span class="eq">${o.eq}</span></div>
+        <div class="sub">${o.sub} = <span class="res">${o.res} ${o.unit}</span> <span class="tabnum">(≈ ${approx(o.v)} ${o.unit})</span></div>
+      </div>
+    </div>`).join('') +
+        `<p style="margin:.2rem 0 0;font-size:.85rem;color:var(--ink-soft)">괄호 속 값은 π ≈ 3.14159로 계산한 어림값이야. 시험에서는 보통 π를 그대로 남겨서 답해.</p>`;
+    }
+    $('x-chips').innerHTML = [30, 45, 60, 90, 120, 180, 270, 360].map(v => `<button type="button" class="chip tabnum" data-x="${v}">${v}°</button>`).join('');
+    $('x-chips').addEventListener('click', e => { const b = e.target.closest('[data-x]'); if (b) { $('x-range').value = b.dataset.x; drawSim(); } });
+    $('r-range').addEventListener('input', drawSim);
+    $('x-range').addEventListener('input', drawSim);
+    drawSim();
+
+    /* ---------------- 문제 그림 ---------------- */
+    function qFig(f) {
+      if (!f) return '';
+      const cx = 110, cy = 88, R = 64;
+      let s = '', vb = '0 0 220 176';
+      const dot = (x, y) => `<circle cx="${f1(x)}" cy="${f1(y)}" r="3" class="f-dot"/>`;
+      switch (f.k) {
+        case 'pi': s = `<circle cx="${cx}" cy="${cy}" r="${R}" class="s-hl"/><line x1="${cx - R}" y1="${cy}" x2="${cx + R}" y2="${cy}" class="s-dash" style="stroke:var(--ink)"/>${dot(cx, cy)}` + txt(cx, cy - 12, '지름') + txt(cx + R * .78, cy - R * .78 - 8, '둘레'); break;
+        case 'chord': case 'segment': {
+          const [ax, ay] = P(cx, cy, R, 30), [bx, by] = P(cx, cy, R, 150);
+          s = `<circle cx="${cx}" cy="${cy}" r="${R}" class="s-base"/>` + (f.k === 'chord' ? `<line x1="${ax}" y1="${ay}" x2="${bx}" y2="${by}" class="s-hl"/>` : `<path d="${segD(cx, cy, R, 30, 150)}" class="f-hl"/>`)
+            + dot(ax, ay) + dot(bx, by) + dot(cx, cy) + txt(...P(cx, cy, R + 12, 30), 'B') + txt(...P(cx, cy, R + 12, 150), 'A') + txt(cx, cy + 12, 'O'); break;
+        }
+        case 'twin': {
+          vb = '0 0 240 130'; const R2 = 46;
+          [[62, 30], [178, 60]].forEach(([c, x]) => {
+            s += `<circle cx="${c}" cy="62" r="${R2}" class="s-base"/><path d="${sectorD(c, 62, R2, 0, x)}" class="f-hl"/><path d="${arcD(c, 62, R2, 0, x)}" class="s-hl"/>` + dot(c, 62) + txt(...P(c, 62, 18, x / 2 + (x === 30 ? 0 : 0)), '');
+            s += txt(c, 124, x + '°', 't-lab');
+          }); break;
+        }
+        case 'circle': {
+          s = `<circle cx="${cx}" cy="${cy}" r="${R}" class="s-base" style="stroke:var(--c-circ);stroke-width:2.5"/>` + dot(cx, cy);
+          s += f.d ? `<line x1="${cx - R}" y1="${cy}" x2="${cx + R}" y2="${cy}" class="s-hl"/>` + txt(cx, cy - 12, f.label)
+            : `<line x1="${cx}" y1="${cy}" x2="${cx + R}" y2="${cy}" class="s-hl"/>` + txt(cx + R / 2, cy - 12, f.label);
+          break;
+        }
+        case 'sector': {
+          const a0 = 90 - f.x / 2 - (f.x === 180 ? 0 : 0), a1 = a0 + f.x;
+          const cyy = f.x <= 180 ? 130 : cy, RR = f.x <= 180 ? 92 : R;
+          vb = f.x <= 180 ? '0 0 220 150' : vb;
+          const A0 = f.x === 180 ? 0 : a0, A1 = f.x === 180 ? 180 : a1;
+          s = `<path d="${sectorD(cx, cyy, RR, A0, A1)}" class="${f.fill ? 'f-hl' : ''}" style="${f.fill ? '' : 'fill:rgba(255,250,235,.8);'}stroke:${f.peri ? 'var(--c-peri)' : 'var(--ink-soft)'};stroke-width:${f.peri ? 3.5 : 2}"/>`;
+          if (f.al || f.peri) s += `<path d="${arcD(cx, cyy, RR, A0, A1)}" class="s-hl" style="${f.peri ? 'stroke:var(--c-peri);stroke-width:3.5' : ''}"/>`;
+          if (f.x < 180) s += `<path d="${arcD(cx, cyy, 18, A0, A1)}" fill="none" stroke="var(--ink)" stroke-width="1.4"/>`;
+          s += dot(cx, cyy);
+          const [rx, ry] = P(cx, cyy, RR / 2, A0); s += txt(rx + (f.x === 180 ? 0 : 14), ry + (f.x === 180 ? 12 : 4), f.rl);
+          if (f.xl) s += txt(...P(cx, cyy, 32, (A0 + A1) / 2), f.xl);
+          if (f.al) s += txt(...P(cx, cyy, RR + 13, (A0 + A1) / 2), f.al);
+          break;
+        }
+        case 'pizza': {
+          s = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="#f3d9a0" stroke="#c28a3e" stroke-width="5"/>`;
+          s += `<path d="${sectorD(cx, cy, R - 2, 0, 45)}" fill="#e7a45a" stroke="var(--c-peri)" stroke-width="2.5"/>`;
+          for (let i = 0; i < 8; i++) { const [x, y] = P(cx, cy, R, i * 45); s += `<line x1="${cx}" y1="${cy}" x2="${f1(x)}" y2="${f1(y)}" stroke="#b2773a" stroke-width="1.5"/>`; }
+          [[30, 20], [120, 36], [200, 40], [260, 30], [320, 44], [160, 20]].forEach(([a, d]) => { const [x, y] = P(cx, cy, d, a); s += `<circle cx="${f1(x)}" cy="${f1(y)}" r="5" fill="#c2553f" opacity=".75"/>`; });
+          s += `<line x1="${cx}" y1="${cy}" x2="${cx}" y2="${cy + R}" class="s-hl" style="stroke-width:3"/>` + txt(cx + 26, cy + R / 2, '12 cm');
+          break;
+        }
+      }
+      return `<svg class="qfig" viewBox="${vb}" role="img" aria-label="문제 그림">${s}</svg>`;
+    }
+
+    /* ---------------- 챌린지 숲 ---------------- */
+    let cur = 0;
+    function normalize(s) {
+      let t = String(s).toLowerCase().replace(/\s+/g, '')
+        .replace(/pi|파이|ㅠ|п/g, 'π')
+        .replace(/cm²|cm\^2|cm2|㎠|m²|m\^2|m2|㎡|cm|㎝|°|도|[()×*]/g, '')
+        .replace(/m/g, '');
+      t = t.replace(/^1π/, 'π').replace(/\+1π/g, '+π');
+      if (t.includes('+')) t = t.split('+').filter(Boolean).sort().join('+');
+      return t;
+    }
+    const isRight = (q, val) => q.type === 'mc' ? val === q.answer : q.answers.some(a => normalize(a) === normalize(val));
+
+    const ACORN_BTN = `<svg viewBox="0 0 40 50" aria-hidden="true">
+  <path class="leaf" d="M22 6 Q29 -1 37 3 Q31 10 22 6Z" fill="#6f9a44" stroke="#3c5a2c" stroke-width="1"/>
+  <path class="nut" d="M7 20 Q6 40 20 48 Q34 40 33 20 Z"/>
+  <ellipse class="shine" cx="12.5" cy="31" rx="2.2" ry="5.5" transform="rotate(10 12.5 31)"/>
+  <path class="cap" d="M4 21.5 Q3 9 20 8 Q37 9 36 21.5 Q20 26.5 4 21.5 Z"/>
+  <path class="stem" d="M19.5 9 Q18.5 4 23 1.5" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+</svg>`;
+    function renderTrail() {
+      $('trail').innerHTML = PARTS.map((name, p) => `
+    <div class="trail-group">
+      <div class="gname">${name} <span style="font-weight:400;color:var(--ink-soft)">${p * 5 + 1}~${p * 5 + 5}번</span></div>
+      <div class="stones">${QUESTIONS.filter(q => q.part === p).map(q => {
+        const a = state.answers[q.id], i = q.id - 1;
+        const cls = ['stone', a && a.status, i === cur ? 'current' : ''].filter(Boolean).join(' ');
+        const lab = `${q.id}번 ${a && a.status === 'correct' ? '맞힘' : a && a.status === 'wrong' ? '다시 도전' : '아직 안 풂'}`;
+        return `<button class="${cls} tabnum" data-i="${i}" aria-label="${lab}">${ACORN_BTN}<span class="num" aria-hidden="true">${q.id}</span></button>`;
+      }).join('')}</div>
+    </div>`).join('');
+      $('progress-text').textContent = `푼 문제 ${solvedCount()} / 20 · 맞힌 문제 ${correctCount()}`;
+    }
+    $('trail').addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (b) goTo(+b.dataset.i); });
+
+    function say(msg) { $('bubble').textContent = msg; }
+
+    function renderQuestion() {
+      const q = QUESTIONS[cur], a = state.answers[q.id] || {};
+      const done = a.status === 'correct';
+      $('q-part').textContent = PARTS[q.part];
+      $('q-num').textContent = `문제 ${q.id} / 20`;
+      $('q-text').textContent = q.q;
+      $('q-fig').innerHTML = qFig(q.fig);
+      const wrongPicks = a.wrongPicks || [];
+      if (q.type === 'mc') {
+        $('q-answer').innerHTML = `<div class="opts">${q.options.map((o, i) => {
+          const cls = done && i === q.answer ? 'is-right' : wrongPicks.includes(i) ? 'is-wrong' : '';
+          return `<button class="opt ${cls}" data-opt="${i}" ${done || wrongPicks.includes(i) ? 'disabled' : ''}><span class="mark">${'①②③④'[i]}</span><span>${o}</span></button>`;
+        }).join('')}</div>`;
+      } else {
+        $('q-answer').innerHTML = `
+      <form class="grid gap-2" id="short-form" novalidate>
+        <label for="ans" class="sr-only">답 입력</label>
+        <div class="short-row">
+          <input id="ans" class="ans-input" autocomplete="off" placeholder="예: 10π" value="${done ? q.answers[0] : ''}" ${done ? 'disabled' : ''}>
+          <span class="unit">${q.unit}</span>
+          <button class="plank small moss" type="submit" ${done ? 'disabled' : ''}>답 확인</button>
+        </div>
+        <div class="keypad" aria-label="기호 입력">
+          <button type="button" class="key" data-key="π">π</button><button type="button" class="key" data-key="+">+</button><button type="button" class="key" data-key="/">/</button><button type="button" class="key" data-key="back">지우기</button>
+        </div>
+      </form>`;
+      }
+      if (done) showFeedback(true, q);
+      else if (a.status === 'wrong') showFeedback(false, q, true);
+      else $('q-feedback').innerHTML = '';
+      $('prev-btn').disabled = cur === 0;
+      $('next-btn').textContent = cur === QUESTIONS.length - 1 ? '처음 문제로' : '다음 문제';
+      renderTrail();
+    }
+
+    function showFeedback(good, q, quiet) {
+      if (good) {
+        $('q-feedback').innerHTML = `<div class="feedback good"><h4>정답이야! 훌륭해!</h4><p style="margin:.3rem 0 0">${q.explain}</p></div>`;
+      } else {
+        $('q-feedback').innerHTML = `<div class="feedback bad">
+      <h4>${quiet ? '아직 못 맞힌 문제야. 다시 도전해 볼래?' : '음… 조금 아쉬워!'}</h4>
+      <div class="flex flex-wrap gap-2" style="margin-top:.5rem">
+        <button class="plank small" id="hint-btn" aria-expanded="false">공식을 다시 한 번 떠올려볼까?</button>
+      </div>
+      <div class="hint-box" id="hint-box" hidden>${q.hint}</div>
+    </div>`;
+        $('hint-btn').addEventListener('click', () => { $('hint-box').hidden = false; $('hint-btn').setAttribute('aria-expanded', 'true'); say('힌트를 보고 한 번 더 해 보자. 넌 할 수 있어!'); });
+      }
+    }
+
+    function submitAnswer(val) {
+      const q = QUESTIONS[cur];
+      const a = state.answers[q.id] || (state.answers[q.id] = { status: null, tries: 0, wrongPicks: [] });
+      if (a.status === 'correct') return;
+      const before = [solvedCount(), correctCount()];
+      a.tries++;
+      if (isRight(q, val)) {
+        a.status = 'correct';
+        renderQuestion();
+        say(['정답이야! 도토리 하나 받아!', '멋져! 먼지 요정들도 신났어!', '완벽해! 공식을 잘 쓰는구나!'][q.id % 3]);
+        cheer();
+        award();
+      } else {
+        a.status = 'wrong';
+        if (q.type === 'mc') a.wrongPicks.push(val);
+        save();
+        renderQuestion();
+        if (q.type === 'short') { const inp = $('ans'); inp.value = val; inp.classList.add('is-wrong'); inp.focus(); inp.select(); }
+        say('어라? 고개가 갸웃… 공식을 다시 한 번 떠올려볼까?');
+        const w = $('wizard'); w.classList.remove('tilt'); void w.offsetWidth; w.classList.add('tilt');
+      }
+      save();
+      const after = [solvedCount(), correctCount()];
+      if (after[0] !== before[0] || after[1] !== before[1]) sendToSheet('progress');
+      if (a.status !== 'correct') checkFinish(); // 정답일 때는 도토리 애니메이션이 끝난 뒤 확인
+    }
+
+    $('q-answer').addEventListener('click', e => {
+      const o = e.target.closest('[data-opt]'); if (o && !o.disabled) { submitAnswer(+o.dataset.opt); return; }
+      const k = e.target.closest('[data-key]');
+      if (k) { const inp = $('ans'); if (!inp) return; inp.value = k.dataset.key === 'back' ? inp.value.slice(0, -1) : inp.value + k.dataset.key; inp.focus(); }
+    });
+    $('q-answer').addEventListener('submit', e => {
+      e.preventDefault(); const v = $('ans').value.trim();
+      if (!v) { say('답을 먼저 적어 줘! π는 아래 π 버튼으로 넣을 수 있어.'); $('ans').focus(); return; }
+      submitAnswer(v);
+    });
+    function goTo(i) { cur = (i + QUESTIONS.length) % QUESTIONS.length; state.current = cur; save(); renderQuestion(); say(`${QUESTIONS[cur].id}번 징검다리야. 천천히 읽어 봐.`); }
+    $('prev-btn').addEventListener('click', () => goTo(cur - 1));
+    $('next-btn').addEventListener('click', () => goTo(cur + 1));
+
+    function cheer() {
+      const w = $('wizard'), sp = $('sprites');
+      [w, sp].forEach(el => { el.classList.remove('cheer', 'jump'); void el.offsetWidth; });
+      w.classList.add('cheer'); sp.classList.add('jump');
+    }
+    const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function award() {
+      state.acorns++; state.totalAcorns++;
+      // 보드의 빈 도토리 칸이 화면에 보이면 그 칸으로, 아니면 상단 주머니로 날아감
+      const slot = document.querySelector(`#acorn-slots [data-slot="${state.acorns - 1}"]`);
+      const sr = slot && slot.getBoundingClientRect();
+      const target = sr && sr.top >= 0 && sr.bottom <= innerHeight ? slot : $('pouch-acorn');
+      const start = (document.querySelector('.feedback.good') || $('q-text')).getBoundingClientRect();
+      const end = target.getBoundingClientRect();
+      const finish = () => {
+        updatePouch(true);
+        if (state.acorns >= 5) { state.acorns -= 5; state.stamps++; save(); setTimeout(showExchange, 250); }
+        else checkFinish();
+      };
+      if (reduced() || !document.body.animate) { finish(); return; }
+      const fl = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      fl.setAttribute('class', 'flyer'); fl.innerHTML = '<use href="#i-acorn"/>';
+      document.body.appendChild(fl);
+      const sx = start.left + start.width / 2 - 22, sy = start.top + 10, ex = end.left + 4, ey = end.top - 4;
+      const anim = fl.animate([
+        { transform: `translate(${sx}px, ${sy}px) scale(.3) rotate(0)`, opacity: 0 },
+        { transform: `translate(${sx}px, ${sy - 70}px) scale(1.5) rotate(-20deg)`, opacity: 1, offset: .35 },
+        { transform: `translate(${ex}px, ${ey}px) scale(.8) rotate(340deg)`, opacity: 1 }
+      ], { duration: 1000, easing: 'cubic-bezier(.4,0,.3,1)' });
+      anim.onfinish = () => { fl.remove(); finish(); };
+    }
+    function updatePouch(bump) {
+      $('acorn-count').textContent = state.acorns; $('stamp-count').textContent = state.stamps;
+      $('st-solved').textContent = solvedCount(); $('st-correct').textContent = correctCount();
+      $('st-acorn').textContent = state.acorns; $('st-stamp').textContent = state.stamps;
+      if (bump) { const p = $('pouch-acorn'); p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump'); }
+      if ($('exchange').hidden) renderBoard(); // 교환 팝업이 닫힌 뒤에 도장이 찍히는 모습을 보여 줌
+    }
+
+    /* 보상 보드: 새로 채워진 칸만 애니메이션 */
+    let lastBoard = null;
+    const MAX_STAMPS = QUESTIONS.length / 5;
+    function renderBoard() {
+      const prev = lastBoard || { acorns: state.acorns, stamps: state.stamps };
+      const left = 5 - state.acorns;
+      $('rb-acorn-text').innerHTML = `모은 도토리 <b class="tabnum">${state.totalAcorns}</b>개 · 다음 칭찬 도장까지 도토리 <b class="tabnum">${left}</b>개`;
+      $('acorn-slots').innerHTML = Array.from({ length: 5 }, (_, i) => {
+        const filled = i < state.acorns, isNew = filled && i >= prev.acorns && state.stamps === prev.stamps;
+        return `<svg class="acorn-slot ${filled ? '' : 'empty'} ${isNew ? 'new' : ''}" data-slot="${i}" aria-hidden="true"><use href="#i-acorn"/></svg>`;
+      }).join('') + `<span class="acorn-ratio tabnum">${state.acorns}/5</span>`;
+      const total = Math.max(MAX_STAMPS, state.stamps);
+      $('rb-stamp-count').textContent = `${state.stamps} / ${total}`;
+      $('stamp-slots').innerHTML = Array.from({ length: total }, (_, i) => {
+        if (i >= state.stamps) return `<div class="stamp-slot">도토리<br>5개</div>`;
+        const rot = [-8, 6, -14, 10, -4][i % 5];
+        return `<div class="stamp-slot filled ${i >= prev.stamps ? 'new' : ''}" style="--rot:${rot}deg"><svg aria-label="칭찬 도장"><use href="#i-stamp"/></svg></div>`;
+      }).join('');
+      lastBoard = { acorns: state.acorns, stamps: state.stamps };
+    }
+
+    function showExchange() {
+      const st = $('ex-stage');
+      st.classList.remove('merge', 'pop');
+      st.querySelectorAll('.ex-acorn, .burst').forEach(n => n.remove());
+      const w = st.clientWidth || 280;
+      for (let i = 0; i < 5; i++) {
+        const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        s.setAttribute('class', 'ex-acorn'); s.innerHTML = '<use href="#i-acorn"/>';
+        const left = (w - 5 * 50) / 2 + i * 50;
+        s.style.left = left + 'px';
+        s.style.setProperty('--dx', (w / 2 - 23 - left) + 'px');
+        st.appendChild(s);
+      }
+      $('exchange').hidden = false;
+      $('ex-close').focus();
+      setTimeout(() => st.classList.add('merge'), 350);
+      setTimeout(() => {
+        st.classList.add('pop'); updatePouch(false);
+        const sp = $('pouch-stamp'); sp.classList.remove('bump'); void sp.offsetWidth; sp.classList.add('bump');
+        if (reduced() || !document.body.animate) return;
+        const cols = ['#f2b6b0', '#e8b64a', '#6f9a44', '#c2553f', '#f7e3a1'];
+        for (let i = 0; i < 18; i++) {
+          const b = document.createElement('span'); b.className = 'burst';
+          b.style.background = cols[i % cols.length]; st.appendChild(b);
+          const ang = (i / 18) * Math.PI * 2, d = 70 + Math.random() * 40;
+          b.animate([{ transform: 'translate(0,0) rotate(0) scale(1)', opacity: 1 },
+          { transform: `translate(${Math.cos(ang) * d}px, ${Math.sin(ang) * d}px) rotate(${200 + i * 20}deg) scale(.6)`, opacity: 0 }],
+            { duration: 900 + Math.random() * 300, easing: 'cubic-bezier(.2,.8,.3,1)', fill: 'forwards' });
+        }
+      }, 1100);
+    }
+    $('ex-close').addEventListener('click', () => {
+      $('exchange').hidden = true;
+      const board = $('reward-board');
+      board.scrollIntoView({ block: 'nearest', behavior: reduced() ? 'auto' : 'smooth' });
+      setTimeout(renderBoard, reduced() ? 0 : 350);
+      say('칭찬 도장판에 도장이 쾅! 찍혔어. 계속 가 보자.');
+      setTimeout(checkFinish, reduced() ? 0 : 1100); // 도장 찍히는 모습을 본 뒤 완주 팝업
+    });
+
+    function checkFinish() {
+      if (state.finished || solvedCount() < QUESTIONS.length || !$('exchange').hidden) return;
+      state.finished = true; save();
+      const c = correctCount();
+      $('fin-text').innerHTML = `20개의 징검다리를 모두 건넜어!<br>맞힌 문제 <b>${c}개</b>, 칭찬도장 <b>${state.stamps}개</b>, 주머니 속 도토리 <b>${state.acorns}개</b>.<br>${c < 20 ? '빨간 돌을 눌러서 못 맞힌 문제에 다시 도전해 봐.' : '모든 문제를 맞혔어. 진짜 마법사야!'}`;
+      $('finish').hidden = false; $('fin-close').focus();
+      sendToSheet('complete');
+    }
+    $('fin-close').addEventListener('click', () => { $('finish').hidden = true; });
+
+    /* ---------------- 화면 4: 구글 시트 전송 ---------------- */
+    async function sendToSheet(event) {
+      const payload = {
+        event,
+        studentId: state.studentId,
+        solvedCount: solvedCount(),
+        correctCount: correctCount(),
+        acorns: state.acorns,
+        stamps: state.stamps,
+        totalAcorns: state.totalAcorns,
+        timestamp: nowStamp()
+      };
+      $('last-payload').textContent = JSON.stringify(payload, null, 2);
+      let status = 'skip';
+      if (GOOGLE_SHEET_API_URL) {
+        try {
+          // Apps Script 웹 앱은 CORS 응답을 주지 않으므로 no-cors + text/plain 으로 보냅니다.
+          await fetch(GOOGLE_SHEET_API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+          status = 'ok';
+        } catch (e) { status = 'fail'; }
+      }
+      sendLog.unshift({ event, status, time: payload.timestamp });
+      sendLog = sendLog.slice(0, 12);
+      renderLog();
+    }
+    const EVENT_NAMES = { login: '입장', progress: '문제 풀이', complete: '원정 완주', manual: '직접 보냄' };
+    function renderLog() {
+      const lab = { ok: ['ok', '보냄'], skip: ['skip', '주소 미설정'], fail: ['fail', '실패'] };
+      $('send-log').innerHTML = sendLog.map(l => `<li><span class="pill ${lab[l.status][0]}">${lab[l.status][1]}</span><b>${EVENT_NAMES[l.event]}</b><span class="tabnum" style="color:var(--ink-soft)">${l.time}</span></li>`).join('') || '<li>배달 기록이 여기에 쌓여.</li>';
+      $('url-note').textContent = GOOGLE_SHEET_API_URL
+        ? '구글 시트 주소가 연결되어 있어. 전송 결과는 시트에서 확인할 수 있어.'
+        : '선생님용 안내: 아직 GOOGLE_SHEET_API_URL이 비어 있어서 시트로 보내지 않고 여기에만 기록하고 있어요.';
+    }
+    $('send-now').addEventListener('click', () => sendToSheet('manual'));
+
+    /* ---------------- 탭 ---------------- */
+    const TABS = ['library', 'forest', 'mailbox'];
+    function showTab(name) {
+      TABS.forEach(t => { $('tab-' + t).hidden = t !== name; $('t-' + t).setAttribute('aria-selected', String(t === name)); });
+      if (name === 'forest') renderQuestion();
+      if (name === 'mailbox') updatePouch(false);
+    }
+    TABS.forEach(t => $('t-' + t).addEventListener('click', () => showTab(t)));
+
+    /* ---------------- 화면 1: 로그인 ---------------- */
+    function parseId(v) {
+      if (!/^\d{5}$/.test(v)) return null;
+      const g = +v[0], c = +v.slice(1, 3), n = +v.slice(3);
+      if (g < 1 || g > 3 || c < 1 || n < 1) return null;
+      return { g, c, n };
+    }
+    $('sid').addEventListener('input', e => {
+      const v = e.target.value = e.target.value.replace(/\D/g, '').slice(0, 5);
+      const p = parseId(v), out = $('sid-parse');
+      out.classList.remove('err');
+      if (!v) out.textContent = '';
+      else if (v.length < 5) out.textContent = `${5 - v.length}자리 더 적어 줘.`;
+      else if (p) out.textContent = `${p.g}학년 ${p.c}반 ${p.n}번 친구, 어서 와!`;
+      else { out.textContent = '학년(1자리)·반(2자리)·번호(2자리) 순서로 적어 줘. 예: 10101'; out.classList.add('err'); }
+    });
+    $('login-form').addEventListener('submit', e => {
+      e.preventDefault();
+      const v = $('sid').value.trim(), p = parseId(v);
+      if (!p) { $('sid-parse').textContent = '학번 5자리를 확인해 줘. 예: 1학년 1반 1번이면 10101'; $('sid-parse').classList.add('err'); $('sid').focus(); return; }
+      state = load(v); state.studentId = v; cur = state.current || 0; lastBoard = null; save();
+      try { sessionStorage.setItem('forest-student', v); } catch (e) {}
+      $('who').textContent = `${p.g}학년 ${p.c}반 ${p.n}번 견습 마법사`;
+      $('screen-login').hidden = true; $('screen-app').hidden = false;
+      updatePouch(false); renderLog(); showTab('library');
+      window.scrollTo(0, 0);
+      sendToSheet('login');
+    });
+    $('logout').addEventListener('click', () => {
+      save(); state = blank(); sendLog = [];
+      try { sessionStorage.removeItem('forest-student'); } catch (e) {}
+      location.href = 'index.html'; // 첫 화면(교문 출석부)으로
+    });
+
+    // 첫 화면에서 이미 학번을 적었으면 다시 묻지 않고 바로 입장
+    try {
+      const fromHub = sessionStorage.getItem('forest-student');
+      if (parseId(fromHub)) { $('sid').value = fromHub; $('login-form').requestSubmit(); }
+    } catch (e) {}
+
+    /* 교문 덩굴 */
+    (function vines() {
+      let s = '';
+      const leaf = (x, y, rot, sc, col) => `<use href="#i-leaf" x="-10" y="-6" width="20" height="12" transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(rot)}) scale(${sc})" fill="${col}"/>`;
+      const cols = ['#5f8040', '#6f9a44', '#4a6d33', '#86ad5a'];
+      const along = (fx, n, off) => { for (let i = 0; i < n; i++) { const t = i / (n - 1), [x, y] = fx(t); s += leaf(x + Math.sin(i * 2.3) * 18, y + Math.cos(i * 1.7) * 10, (i * 67 + off) % 360, 1.2 + (i % 3) * .35, cols[i % 4]); } };
+      const arch = t => { const u = 1 - t; return [u * u * 120 + 2 * u * t * 400 + t * t * 680, u * u * 220 + 2 * u * t * -20 + t * t * 220]; };
+      s += `<path d="M120 540 V220 Q400 -20 680 220 V540" fill="none" stroke="#557a38" stroke-width="3" stroke-dasharray="40 14 60 20" opacity=".8"/>`;
+      along(arch, 34, 10);
+      along(t => [120, 230 + t * 300], 14, 40);
+      along(t => [680, 220 + t * 320], 12, 80);
+      for (let i = 0; i < 7; i++) { const [x, y] = arch(.1 + i * .13); s += `<circle cx="${f1(x + 8)}" cy="${f1(y + 14)}" r="4" fill="${i % 2 ? '#f2b6b0' : '#fbe8a6'}"/>`; }
+      $('vines').innerHTML = s;
+    })();
+  </script>
+</body>
+
+</html>
