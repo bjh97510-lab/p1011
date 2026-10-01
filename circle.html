@@ -2092,7 +2092,23 @@
     let state = blank();
     let sendLog = [];
     const storeKey = id => 'magic-circle-quest-' + id;
-    function save() { try { localStorage.setItem(storeKey(state.studentId), JSON.stringify(state)); } catch (e) { } }
+    function save() {
+      try { localStorage.setItem(storeKey(state.studentId), JSON.stringify(state)); } catch (e) { }
+      saveWallet();
+    }
+
+    /* 도토리 지갑: 다각형·원과 부채꼴·입체도형이 학번별로 함께 씀 (assets/forest.js와 같은 저장 키) */
+    let wallet = { acorns: 0, stamps: 0, total: 0 };
+    const walletKey = id => 'forest-wallet:' + id;
+    function loadWallet(id, seed) {
+      try { const raw = localStorage.getItem(walletKey(id)); if (raw) return Object.assign({ acorns: 0, stamps: 0, total: 0 }, JSON.parse(raw)); } catch (e) { }
+      // 지갑이 생기기 전에 이 앱에서 모은 보상을 옮겨 옴
+      return { acorns: seed.acorns || 0, stamps: seed.stamps || 0, total: seed.totalAcorns || 0 };
+    }
+    function saveWallet() {
+      if (!state.studentId) return;
+      try { localStorage.setItem(walletKey(state.studentId), JSON.stringify(wallet)); } catch (e) { }
+    }
     function load(id) {
       try { const raw = localStorage.getItem(storeKey(id)); if (raw) return Object.assign(blank(), JSON.parse(raw)); } catch (e) { }
       return Object.assign(blank(), { studentId: id });
@@ -2404,16 +2420,17 @@
     const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function award() {
-      state.acorns++; state.totalAcorns++;
+      wallet = loadWallet(state.studentId, state); // 다른 단원에서 모은 것까지 합쳐서 더함
+      wallet.acorns++; wallet.total++;
       // 보드의 빈 도토리 칸이 화면에 보이면 그 칸으로, 아니면 상단 주머니로 날아감
-      const slot = document.querySelector(`#acorn-slots [data-slot="${state.acorns - 1}"]`);
+      const slot = document.querySelector(`#acorn-slots [data-slot="${wallet.acorns - 1}"]`);
       const sr = slot && slot.getBoundingClientRect();
       const target = sr && sr.top >= 0 && sr.bottom <= innerHeight ? slot : $('pouch-acorn');
       const start = (document.querySelector('.feedback.good') || $('q-text')).getBoundingClientRect();
       const end = target.getBoundingClientRect();
       const finish = () => {
         updatePouch(true);
-        if (state.acorns >= 5) { state.acorns -= 5; state.stamps++; save(); setTimeout(showExchange, 250); }
+        if (wallet.acorns >= 5) { wallet.acorns -= 5; wallet.stamps++; save(); setTimeout(showExchange, 250); }
         else checkFinish();
       };
       if (reduced() || !document.body.animate) { finish(); return; }
@@ -2429,9 +2446,9 @@
       anim.onfinish = () => { fl.remove(); finish(); };
     }
     function updatePouch(bump) {
-      $('acorn-count').textContent = state.acorns; $('stamp-count').textContent = state.stamps;
+      $('acorn-count').textContent = wallet.acorns; $('stamp-count').textContent = wallet.stamps;
       $('st-solved').textContent = solvedCount(); $('st-correct').textContent = correctCount();
-      $('st-acorn').textContent = state.acorns; $('st-stamp').textContent = state.stamps;
+      $('st-acorn').textContent = wallet.acorns; $('st-stamp').textContent = wallet.stamps;
       if (bump) { const p = $('pouch-acorn'); p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump'); }
       if ($('exchange').hidden) renderBoard(); // 교환 팝업이 닫힌 뒤에 도장이 찍히는 모습을 보여 줌
     }
@@ -2440,21 +2457,21 @@
     let lastBoard = null;
     const MAX_STAMPS = QUESTIONS.length / 5;
     function renderBoard() {
-      const prev = lastBoard || { acorns: state.acorns, stamps: state.stamps };
-      const left = 5 - state.acorns;
-      $('rb-acorn-text').innerHTML = `모은 도토리 <b class="tabnum">${state.totalAcorns}</b>개 · 다음 칭찬 도장까지 도토리 <b class="tabnum">${left}</b>개`;
+      const prev = lastBoard || { acorns: wallet.acorns, stamps: wallet.stamps };
+      const left = 5 - wallet.acorns;
+      $('rb-acorn-text').innerHTML = `모은 도토리 <b class="tabnum">${wallet.total}</b>개 · 다음 칭찬 도장까지 도토리 <b class="tabnum">${left}</b>개`;
       $('acorn-slots').innerHTML = Array.from({ length: 5 }, (_, i) => {
-        const filled = i < state.acorns, isNew = filled && i >= prev.acorns && state.stamps === prev.stamps;
+        const filled = i < wallet.acorns, isNew = filled && i >= prev.acorns && wallet.stamps === prev.stamps;
         return `<svg class="acorn-slot ${filled ? '' : 'empty'} ${isNew ? 'new' : ''}" data-slot="${i}" aria-hidden="true"><use href="#i-acorn"/></svg>`;
-      }).join('') + `<span class="acorn-ratio tabnum">${state.acorns}/5</span>`;
-      const total = Math.max(MAX_STAMPS, state.stamps);
-      $('rb-stamp-count').textContent = `${state.stamps} / ${total}`;
+      }).join('') + `<span class="acorn-ratio tabnum">${wallet.acorns}/5</span>`;
+      const total = Math.max(MAX_STAMPS, wallet.stamps);
+      $('rb-stamp-count').textContent = `${wallet.stamps} / ${total}`;
       $('stamp-slots').innerHTML = Array.from({ length: total }, (_, i) => {
-        if (i >= state.stamps) return `<div class="stamp-slot">도토리<br>5개</div>`;
+        if (i >= wallet.stamps) return `<div class="stamp-slot">도토리<br>5개</div>`;
         const rot = [-8, 6, -14, 10, -4][i % 5];
         return `<div class="stamp-slot filled ${i >= prev.stamps ? 'new' : ''}" style="--rot:${rot}deg"><svg aria-label="칭찬 도장"><use href="#i-stamp"/></svg></div>`;
       }).join('');
-      lastBoard = { acorns: state.acorns, stamps: state.stamps };
+      lastBoard = { acorns: wallet.acorns, stamps: wallet.stamps };
     }
 
     function showExchange() {
@@ -2501,7 +2518,7 @@
       if (state.finished || solvedCount() < QUESTIONS.length || !$('exchange').hidden) return;
       state.finished = true; save();
       const c = correctCount();
-      $('fin-text').innerHTML = `20개의 징검다리를 모두 건넜어!<br>맞힌 문제 <b>${c}개</b>, 칭찬도장 <b>${state.stamps}개</b>, 주머니 속 도토리 <b>${state.acorns}개</b>.<br>${c < 20 ? '빨간 돌을 눌러서 못 맞힌 문제에 다시 도전해 봐.' : '모든 문제를 맞혔어. 진짜 마법사야!'}`;
+      $('fin-text').innerHTML = `20개의 징검다리를 모두 건넜어!<br>맞힌 문제 <b>${c}개</b>, 칭찬도장 <b>${wallet.stamps}개</b>, 주머니 속 도토리 <b>${wallet.acorns}개</b>.<br>${c < 20 ? '빨간 돌을 눌러서 못 맞힌 문제에 다시 도전해 봐.' : '모든 문제를 맞혔어. 진짜 마법사야!'}`;
       $('finish').hidden = false; $('fin-close').focus();
       sendToSheet('complete');
     }
@@ -2514,9 +2531,9 @@
         studentId: state.studentId,
         solvedCount: solvedCount(),
         correctCount: correctCount(),
-        acorns: state.acorns,
-        stamps: state.stamps,
-        totalAcorns: state.totalAcorns,
+        acorns: wallet.acorns,
+        stamps: wallet.stamps,
+        totalAcorns: wallet.total,
         timestamp: nowStamp()
       };
       $('last-payload').textContent = JSON.stringify(payload, null, 2);
@@ -2571,7 +2588,7 @@
       e.preventDefault();
       const v = $('sid').value.trim(), p = parseId(v);
       if (!p) { $('sid-parse').textContent = '학번 5자리를 확인해 줘. 예: 1학년 1반 1번이면 10101'; $('sid-parse').classList.add('err'); $('sid').focus(); return; }
-      state = load(v); state.studentId = v; cur = state.current || 0; lastBoard = null; save();
+      state = load(v); state.studentId = v; wallet = loadWallet(v, state); cur = state.current || 0; lastBoard = null; save();
       try { sessionStorage.setItem('forest-student', v); } catch (e) {}
       $('who').textContent = `${p.g}학년 ${p.c}반 ${p.n}번 견습 마법사`;
       $('screen-login').hidden = true; $('screen-app').hidden = false;
@@ -2584,6 +2601,9 @@
       try { sessionStorage.removeItem('forest-student'); } catch (e) {}
       location.href = 'index.html'; // 첫 화면(교문 출석부)으로
     });
+
+    // 뒤로 가기로 돌아왔을 때 다른 단원에서 모은 도토리를 반영
+    window.addEventListener('pageshow', e => { if (e.persisted && state.studentId) { wallet = loadWallet(state.studentId, state); updatePouch(false); } });
 
     // 첫 화면에서 이미 학번을 적었으면 다시 묻지 않고 바로 입장
     try {

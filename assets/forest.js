@@ -53,9 +53,20 @@
   };
 
   /* ---------- 도토리 지갑 ---------- */
-  const WALLET_KEY = 'forest-wallet';
-  const wallet = Object.assign({ acorns: 0, stamps: 0, total: 0 }, store.get(WALLET_KEY, {}));
+  // 첫 화면에서 적은 학번별 지갑 (원과 부채꼴 앱과 같은 키). 학번 없이 바로 들어오면 이 기기 공용 지갑.
+  const walletKey = () => {
+    let sid = '';
+    try { sid = sessionStorage.getItem('forest-student') || ''; } catch (e) {}
+    return sid ? 'forest-wallet:' + sid : 'forest-wallet';
+  };
+  const wallet = { acorns: 0, stamps: 0, total: 0 };
+  const reloadWallet = () => Object.assign(wallet, { acorns: 0, stamps: 0, total: 0 }, store.get(walletKey(), {}));
+  const saveWallet = () => store.set(walletKey(), wallet);
+  reloadWallet();
   let pouchEl = null;
+  // 다른 앱에서 모은 도토리가 반영되도록, 뒤로 가기로 돌아오거나 다른 탭에서 바뀌면 다시 읽음
+  window.addEventListener('pageshow', () => { reloadWallet(); renderPouch(); });
+  window.addEventListener('storage', e => { if (e.key === walletKey()) { reloadWallet(); renderPouch(); } });
 
   function mountPouch(el) {
     pouchEl = el;
@@ -119,12 +130,13 @@
   }
 
   function award(fromEl) {
+    reloadWallet(); // 다른 탭에서 모은 것까지 합쳐서 더함
     wallet.acorns++; wallet.total++;
     const done = () => {
       renderPouch('acorn');
-      if (wallet.acorns >= 5) { wallet.acorns -= 5; wallet.stamps++; store.set(WALLET_KEY, wallet); setTimeout(showExchange, 250); }
+      if (wallet.acorns >= 5) { wallet.acorns -= 5; wallet.stamps++; saveWallet(); setTimeout(showExchange, 250); }
     };
-    store.set(WALLET_KEY, wallet);
+    saveWallet();
     const target = pouchEl && pouchEl.querySelector('[data-p="acorn"]');
     if (!target || !fromEl || reduced() || !document.body.animate) { done(); return; }
     const s = fromEl.getBoundingClientRect(), e = target.getBoundingClientRect();
@@ -274,5 +286,6 @@
     render();
   }
 
-  window.Forest = { mountPouch, award, mountQuiz, normalize, store, reduced };
+  const refreshPouch = () => { reloadWallet(); renderPouch(); };
+  window.Forest = { mountPouch, refreshPouch, award, mountQuiz, normalize, store, reduced };
 })();

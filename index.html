@@ -116,7 +116,7 @@
       <h1>숲속 마법학교<br>도형 원정대</h1>
       <p id="hero-sub">어느 길로 원정을 떠나 볼까? 갈림길에서 하나를 골라 줘.</p>
     </header>
-    <div class="who-bar"><span class="who" id="who"></span><button class="plank small ghost" id="logout" type="button">교문으로 나가기</button></div>
+    <div class="who-bar"><span class="who" id="who"></span><div class="pouch" id="pouch" aria-label="보상 주머니 (모든 단원 합계)"></div><button class="plank small ghost" id="logout" type="button">교문으로 나가기</button></div>
 
     <!-- 첫 번째 갈림길: 평면도형 / 입체도형 -->
     <section id="step-root" class="doors" aria-label="도형 종류 고르기">
@@ -220,6 +220,7 @@
       session.set(v);
       $('who').textContent = `${p.g}학년 ${p.c}반 ${p.n}번 견습 마법사`;
       $('screen-login').hidden = true; $('screen-main').hidden = false;
+      Forest.refreshPouch();
       window.scrollTo(0, 0);
       return true;
     }
@@ -244,6 +245,7 @@
       $('screen-main').hidden = true; $('screen-login').hidden = false;
       $('sid').value = ''; $('sid-parse').textContent = ''; $('sid').focus();
     });
+    Forest.mountPouch($('pouch'));
     if (!enter(session.get())) $('screen-login').hidden = false;
 
     /* 교문 덩굴 */
